@@ -1,15 +1,33 @@
+// AI LINK: 
+
 // AI Link: 
 
-// Live text rendering 
-const textInput = document.getElementById('goal-text');
-const cardText = document.querySelector('#card-text');
+// LIVE TEXT RENDER - HEADING
+const goalInput = document.getElementById('goal-text');
+const goalCard = document.querySelector('#card-text');
 
-textInput.addEventListener('input', (e) => {
-  cardText.textContent = e.target.value;
-});
-
-textInput.addEventListener('input', (e) => {
+goalInput.addEventListener('input', (e) => {
   const value = e.target.value;
-  cardText.textContent = value !== '' ? value : 'Get Started!';
+  goalCard.textContent = value !== '' ? value : 'Get Started!';
 });
+
+// LIVE TEXT RENDER - REWARD
+const rewardInput = document.getElementById('reward-text');
+const rewardCard = document.querySelector('.card-text-reward');
+
+rewardInput.addEventListener('input', (e) => {
+  const value = e.target.value;
+  rewardCard.textContent = value !== '' ? value : 'Add your reward!';
+});
+
+// RENDER OF GRID
+
+// LIVE COLOR RENDER BACKGROUND + TEXT + STAMP GRID
+
+
+// FONT CHANGE RENDER 
+
+// PRINT STUFF
+
+
 

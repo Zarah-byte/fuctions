@@ -39,6 +39,8 @@ main {
 	background-color:#d4d4d4;
 
 	border-radius: .9rem;
+
+	text-align: center;
 }
 
 /* following this tutorial on styling form fields; https://www.w3schools.com/css/css_forms.asp */
@@ -100,6 +102,12 @@ input[type=text] {
 	box-sizing: border-box;
 }
 
+.reward-line {
+	display: flex;
+	flex-direction: row;
+	gap: .5rem;
+}
+
 buttons {
 	display: flex;
 	flex-direction: row;
@@ -117,30 +125,68 @@ footer {
 }
 
 @media (width >768px) {
-	main {
-		/* height: 100vh; */
-		width: 100%;
-		flex-direction: row;
-
-		.column-1,.column-2 {
-		flex: 1;
-		min-width: 0;
-	}
-	}
+		header {
+			padding-top: .5rem;
+			padding-bottom: .5rem;
+			position: sticky;
+			top: 0;
+		}
 	
-	.column-2 {
-		background-color: blueviolet;
-		height: 100vh;
-		width: auto;
+		main {
+			flex: 1;
+			min-height: 0;
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			align-items: stretch;
 	
-		align-items: center;
-
-		.card {
-			height: 40vh;
-			width: 40vw;
-			background-color:#d4d4d4;
-		
-			border-radius: .9rem;
+			.column-1,
+			.column-2 {
+				flex: 1;
+				min-width: 0;
+				min-height: 0;
+			}
+	
+			.column-1 {
+				padding: 2rem;
+				overflow-y: auto;
+			}
+	
+			.column-2 {
+				background-color: rgb(0, 0, 0);
+				padding: 2rem;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				overflow: hidden;
+				gap: 1.5rem;
+	
+				.card {
+					width: min(40vw, 38rem);
+					height: 40vh;
+					background-color: #d4d4d4;
+					border-radius: 0.9rem;
+					margin: 0 auto;
+				}
+			}
+		}
+	
+		.goal-font {
+			ul {
+				grid-template-columns: repeat(4, minmax(0, 1fr));
+			}
+		}
+	
+		.goal-icon {
+			ul {
+				grid-template-columns: repeat(4, minmax(0, 5rem));
+			}
+		}
+	
+		footer {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
 		}
 	}
-}
