@@ -20,7 +20,11 @@ rewardInput.addEventListener('input', (e) => {
   rewardCard.textContent = value !== '' ? value : 'Add your reward!';
 });
 
-// RENDER OF GRID + ICONS
+// RENDER OF GRID
+const goalNumbers = document.querySelectorAll('.goal-number li');
+const punchItems = document.querySelectorAll('.punches li');
+
+// RENDER OF ICONS
   li.innerHTML = currentIcon;
   const icons = {
     star:`insert svg code here`,

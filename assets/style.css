@@ -1,4 +1,6 @@
-/* FONTS */
+/* ========================
+  FONTS
+======================== */
 @font-face {
 	font-family: "Clarity City";
 	src: url("../fonts/Clarity City/WOFF2/ClarityCity-Regular.woff2") format("woff2");
@@ -13,6 +15,9 @@
 	font-weight: 700;
 }
 
+/* ========================
+  VARIABLES
+======================== */
 :root {
 	--preview-bg: #1a1a1a;
 	--preview-card-radius: 1.5rem;
