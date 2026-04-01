@@ -82,7 +82,6 @@ function applyIconToGrid() {
   });
 }
 
-
 // LIVE COLOR RENDER BACKGROUND + TEXT + STAMP GRID
 
 
