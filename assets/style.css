@@ -1,5 +1,5 @@
 /* ========================
-  FONTS
+   FONTS
 ======================== */
 @font-face {
 	font-family: "Clarity City";
@@ -16,182 +16,223 @@
 }
 
 /* ========================
-  VARIABLES
+   VARIABLES
 ======================== */
 :root {
 	--preview-bg: #1a1a1a;
 	--preview-card-radius: 1.5rem;
 	--preview-cell: #d4d4d4;
+	--control-bg: antiquewhite;
+	--control-border: #1a1a1a;
 }
 
 body {
 	font-family: "Clarity City", sans-serif;
 }
 
+header,
+main,
+footer {
+	padding-inline: 1rem;
+}
 
 main {
 	display: flex;
 	flex-direction: column;
+	gap: 2rem;
 
-	height: auto;
-	
-	h1,h2 {
-	font-weight: 700;
+	h1,
+	h2 {
+		font-weight: 700;
+	}
 }
 
-.card {
-	height: 40vh;
-	background-color:#d4d4d4;
-
-	border-radius: .9rem;
-
-	text-align: center;
+form {
+	display: grid;
+	gap: 1.5rem;
 }
 
-/* following this tutorial on styling form fields; https://www.w3schools.com/css/css_forms.asp */
+input[type="text"] {
+	width: 100%;
+	padding: 0.75rem;
+	margin-top: 0.625rem;
+	border: 1px solid var(--control-border);
+	border-radius: 0.5rem;
+}
 
-	input[type="color"] {
+input[type="color"] {
 	inline-size: 3rem;
 	block-size: 2.5rem;
 	border-radius: 0.35rem;
 }
-	
-	ul {
-		display: grid;
-		grid-template-columns: repeat(4, 5rem);
-		gap: 1rem;
-		justify-content: start;
-	}
 
-	button {
-		background-color: antiquewhite;
-		padding: 1rem;
-		border-radius: 1rem;
-	}
+ul {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 5rem));
+	gap: 1rem;
+	justify-content: start;
 }
 
-.goal-number {
-	ul {
-		margin-top: 2rem; 
-	li {
-		background-color: antiquewhite;
-		
-		padding: 1rem;
+button {
+	background-color: var(--control-bg);
+	padding: 1rem;
+	border-radius: 1rem;
+}
 
-		height: 5rem;
-		width:auto;
-		border-radius: 1000%;
+/* ========================
+   COLUMN 1 — CONTROLS
+======================== */
+.column-1 {
+	.goal-number {
+		ul {
+			margin-top: 1rem;
+		}
 
-		display: flex;
-		text-align: center;
-		justify-content: center;
+		li {
+			background-color: var(--control-bg);
+			min-height: 5rem;
+			padding: 1rem;
+			border-radius: 999rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			border: 0.125rem solid transparent;
 
-		p {
-			margin: 0; 
+			&.selected {
+				border-color: var(--control-border);
+			}
+		}
+	}
+
+	.goal-icon {
+		li {
+			border: 1px solid var(--control-border);
+			border-radius: 0.5rem;
 		}
 	}
 }
-}
 
-.goal-icon {
-	li {
-		border: #1a1a1a 1px solid;
-		border-radius: .5rem;
+/* ========================
+   COLUMN 2 — PREVIEW
+======================== */
+.column-2 {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+
+	.card {
+		min-height: 24rem;
+		background-color: var(--preview-cell);
+		border-radius: 0.9rem;
+		padding: 1.5rem;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-evenly;
+		gap: 1.5rem;
 	}
-}
 
-input[type=text] {
-	width: 100%;
-	padding: 12px;
-	margin: 10px 0;
-	box-sizing: border-box;
-}
+	.punches {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 0.75rem;
+		width: 100%;
 
-.reward-line {
-	display: flex;
-	flex-direction: row;
-	gap: .5rem;
-}
+		li {
+			display: grid;
+			place-items: center;
+			min-height: 3rem;
+			border-radius: 999rem;
+			background: var(--control-bg);
+		}
 
-buttons {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+		li.hidden {
+			visibility: hidden;
+		  }
+	}
+
+	.reward-line {
+		display: flex;
+		flex-direction: row;
+		gap: 0.5rem;
+	}
+
+	.buttons {
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+		justify-content: space-between;
+	}
 }
 
 footer {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	margin-left: 2rem;
-	margin-right: 2rem;
-	margin-top: 1rem;
-	margin-bottom: 1rem;
+	margin-block: 1rem;
 }
 
-@media (width >768px) {
-		header {
-			padding-top: .5rem;
-			padding-bottom: .5rem;
-			position: sticky;
-			top: 0;
-		}
-	
-		main {
+/* ========================
+   TABLET + DESKTOP
+======================== */
+@media (width > 768px) {
+	header {
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
+		position: sticky;
+		top: 0;
+	}
+
+	main {
+		min-height: 0;
+		width: 100%;
+		flex-direction: row;
+		align-items: stretch;
+
+		.column-1,
+		.column-2 {
 			flex: 1;
+			min-width: 0;
 			min-height: 0;
-			width: 100%;
-			display: flex;
-			flex-direction: row;
-			align-items: stretch;
-	
-			.column-1,
-			.column-2 {
-				flex: 1;
-				min-width: 0;
-				min-height: 0;
-			}
-	
-			.column-1 {
-				padding: 2rem;
-				overflow-y: auto;
-			}
-	
-			.column-2 {
-				background-color: rgb(0, 0, 0);
-				padding: 2rem;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				overflow: hidden;
-				gap: 1.5rem;
-	
-				.card {
-					width: min(40vw, 38rem);
-					height: 40vh;
-					background-color: #d4d4d4;
-					border-radius: 0.9rem;
-					margin: 0 auto;
-				}
+		}
+
+		.column-1 {
+			padding: 2rem;
+			overflow-y: auto;
+		}
+
+		.column-2 {
+			background-color: var(--preview-bg);
+			padding: 2rem;
+			justify-content: center;
+			align-items: center;
+			overflow: hidden;
+
+			.card {
+				width: min(40vw, 38rem);
+				min-height: 24rem;
+				margin: 0 auto;
 			}
 		}
-	
+	}
+
+	.column-1 {
 		.goal-font {
 			ul {
 				grid-template-columns: repeat(4, minmax(0, 1fr));
 			}
 		}
-	
+
 		.goal-icon {
 			ul {
 				grid-template-columns: repeat(4, minmax(0, 5rem));
 			}
 		}
-	
-		footer {
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: center;
-		}
 	}
+
+	footer {
+		align-items: center;
+	}
+}
