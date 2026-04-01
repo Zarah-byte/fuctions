@@ -1,0 +1,99 @@
+/* FONTS */
+@font-face {
+	font-family: "Clarity City";
+	src: url("../fonts/Clarity City/WOFF2/ClarityCity-Regular.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: "Clarity City";
+	src: url("../fonts/Clarity City/WOFF2/ClarityCity-Bold.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 700;
+}
+
+:root {
+	--preview-bg: #1a1a1a;
+	--preview-card-radius: 1.5rem;
+	--preview-cell: #d4d4d4;
+}
+
+body {
+	font-family: "Clarity City", sans-serif;
+}
+
+
+main {
+	display: flex;
+	flex-direction: column;
+	
+	h1,h2 {
+	font-weight: 700;
+}
+
+	input[type="color"] {
+	inline-size: 3rem;
+	block-size: 2.5rem;
+	border-radius: 0.35rem;
+}
+	
+	ul {
+		display: grid;
+		grid-template-columns: repeat(4, 5rem);
+		gap: 1rem;
+		justify-content: start;
+	}
+
+	button {
+		background-color: antiquewhite;
+		padding: 1rem;
+		border-radius: 1rem;
+	}
+}
+
+.goal-number {
+	ul {
+		margin-top: 2rem; 
+	li {
+		background-color: antiquewhite;
+		
+		padding: 1rem;
+
+		height: 5rem;
+		width:auto;
+		border-radius: 1000%;
+
+		display: flex;
+		text-align: center;
+		justify-content: center;
+
+		p {
+			margin: 0; 
+		}
+	}
+}
+}
+
+buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-left: 2rem;
+	margin-right: 2rem;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+@media (width >768px) {
+	main {
+		flex-direction: row;
+	}
+
+}
