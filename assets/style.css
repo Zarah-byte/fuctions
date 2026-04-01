@@ -204,7 +204,7 @@ button {
 			width: 5rem;
 			height: 5rem;
 			border-radius: 50%;
-			background-color: antiquewhite;
+			background-color: rgba(0, 0, 0, 0.3);
 			font-size: 1.5rem;
 		}
 	}
@@ -248,6 +248,7 @@ footer {
 	}
 
 	.card {
+	border: #161616 .02rem solid;
 	visibility: visible;
 	position: absolute;
 	top: 0;
@@ -258,6 +259,8 @@ footer {
 	.card * {
 	  visibility: visible;
 	}
+
+	/* '*' selectes alll children of the .card */
 
 	header,
 	footer,

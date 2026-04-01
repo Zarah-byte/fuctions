@@ -1,3 +1,4 @@
+// AI Link https://claude.ai/share/3e4dbf9c-7b90-4bea-bfde-2ccf5f829bce
 // LIVE TEXT RENDER - HEADING
 const goalInput = document.getElementById('goal-text');
 const goalCard = document.getElementById('card-text');
