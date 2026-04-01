@@ -19,32 +19,51 @@
    VARIABLES
 ======================== */
 :root {
+	--bg: #ffffff;
+	--text: #161616;
+	--panel: #ffffff;
 	--preview-bg: #1a1a1a;
-	--preview-card-radius: 1.5rem;
-	--preview-cell: #d4d4d4;
+	--preview-card: #d4d4d4;
 	--control-bg: antiquewhite;
-	--control-border: #1a1a1a;
+	--border: #1a1a1a;
+	--accent: #ff0000;
+}
+
+html,
+body {
+	min-height: 100vh;
 }
 
 body {
 	font-family: "Clarity City", sans-serif;
-}
+	background-color: var(--bg);
+	color: var(--text);
+	display: flex;
+	flex-direction: column;
 
-header,
-main,
-footer {
 	padding-inline: 1rem;
 }
 
+
+header {
+	padding-block: 1rem;
+
+	h1 {
+		font-size: clamp(2rem, 4vw, 3rem);
+		font-weight: 700;
+	}
+
+	p {
+		margin-top: 0.35rem;
+	}
+}
+
 main {
+	flex: 1;
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
-
-	h1,
-	h2 {
-		font-weight: 700;
-	}
+	padding-bottom: 2rem;
 }
 
 form {
@@ -54,10 +73,11 @@ form {
 
 input[type="text"] {
 	width: 100%;
-	padding: 0.75rem;
 	margin-top: 0.625rem;
-	border: 1px solid var(--control-border);
-	border-radius: 0.5rem;
+	padding: 0.85rem 1rem;
+	border: 1px solid var(--border);
+	border-radius: 0.75rem;
+	background-color: var(--panel);
 }
 
 input[type="color"] {
@@ -75,40 +95,77 @@ ul {
 
 button {
 	background-color: var(--control-bg);
-	padding: 1rem;
 	border-radius: 1rem;
+	padding: 1rem;
+	text-align: center;
 }
 
 /* ========================
    COLUMN 1 — CONTROLS
 ======================== */
 .column-1 {
-	.goal-number {
+	p,
+	label {
+		display: block;
+	}
+
+	.goal-font,
+	.goal-number,
+	.goal-icon {
 		ul {
 			margin-top: 1rem;
 		}
+	}
 
-		li {
-			background-color: var(--control-bg);
-			min-height: 5rem;
-			padding: 1rem;
-			border-radius: 999rem;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			cursor: pointer;
+	.goal-font {
+		button {
+			width: 100%;
+			min-height: 4.5rem;
 			border: 0.125rem solid transparent;
 
 			&.selected {
-				border-color: var(--control-border);
+				border-color: var(--border);
+			}
+		}
+
+		.font-btn[data-font="annie"] {
+			font-family: "Annie Use Your Telescope", cursive;
+		}
+
+		.font-btn[data-font="bagel"] {
+			font-family: "Bagel Fat One", system-ui;
+		}
+
+		.font-btn[data-font="miniver"] {
+			font-family: "Miniver", cursive;
+		}
+	}
+
+	.goal-number {
+		button {
+			width: 5rem;
+			height: 5rem;
+			border-radius: 50%;
+			border: 0.125rem solid transparent;
+			cursor: pointer;
+
+			&.selected {
+				border-color: var(--border);
 			}
 		}
 	}
 
 	.goal-icon {
-		li {
-			border: 1px solid var(--control-border);
-			border-radius: 0.5rem;
+		button {
+			width: 5rem;
+			height: 5rem;
+			border: 1px solid var(--border);
+			border-radius: 1rem;
+			font-size: 1.75rem;
+
+			&.selected {
+				outline: 0.125rem solid var(--border);
+			}
 		}
 	}
 }
@@ -119,120 +176,129 @@ button {
 .column-2 {
 	display: flex;
 	flex-direction: column;
-	gap: 1.5rem;
+	gap: 1rem;
 
 	.card {
 		min-height: 24rem;
-		background-color: var(--preview-cell);
-		border-radius: 0.9rem;
 		padding: 1.5rem;
+		border-radius: 1rem;
+		background-color: var(--preview-card);
 		text-align: center;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-evenly;
 		gap: 1.5rem;
+
+		h2 {
+			font-size: clamp(1.75rem, 4vw, 3rem);
+			font-weight: 700;
+		}
 	}
 
 	.punches {
-		display: grid;
-		grid-template-columns: repeat(4, minmax(0, 1fr));
-		gap: 0.75rem;
-		width: 100%;
-
 		li {
-			display: grid;
-			place-items: center;
-			min-height: 3rem;
-			border-radius: 999rem;
-			background: var(--control-bg);
-		}
-
-		li.hidden {
-			visibility: hidden;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 5rem;
+			height: 5rem;
+			border-radius: 50%;
+			background-color: antiquewhite;
+			font-size: 1.5rem;
 		}
 	}
 
 	.reward-line {
 		display: flex;
-		flex-direction: row;
 		gap: 0.5rem;
+		flex-wrap: wrap;
+		justify-content: center;
 	}
 
 	.buttons {
 		display: flex;
-		flex-direction: row;
 		gap: 1rem;
-		justify-content: space-between;
+
+		button {
+			flex: 1;
+		}
 	}
+}
+
+.hidden {
+	display: none !important;
 }
 
 footer {
 	display: flex;
-	flex-direction: row;
 	justify-content: space-between;
-	margin-block: 1rem;
+	gap: 1rem;
+	flex-wrap: wrap;
+	margin-top: auto;
+	padding-block: 1rem;
+}
+
+/* ========================
+  PRINT
+======================== */
+@media print {
+	body * {
+	visibility: hidden;
+	}
+
+	.card {
+	visibility: visible;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	}
+
+	.card * {
+	  visibility: visible;
+	}
+
+	header,
+	footer,
+	.column-1,
+	.buttons {
+	display: none;
+	}
 }
 
 /* ========================
    TABLET + DESKTOP
 ======================== */
-@media (width > 768px) {
+@media (min-width: 48rem) {
 	header {
-		padding-top: 0.5rem;
-		padding-bottom: 0.5rem;
-		position: sticky;
-		top: 0;
+		padding-top: 0.75rem;
 	}
 
 	main {
-		min-height: 0;
-		width: 100%;
 		flex-direction: row;
 		align-items: stretch;
-
-		.column-1,
-		.column-2 {
-			flex: 1;
-			min-width: 0;
-			min-height: 0;
 		}
 
 		.column-1 {
-			padding: 2rem;
-			overflow-y: auto;
+			flex: 1;
+			min-width: 0;
+
+			padding-right: 1rem;
 		}
 
 		.column-2 {
+			flex: 1;
+			min-width: 0;
+
 			background-color: var(--preview-bg);
 			padding: 2rem;
+			border-radius: 1rem;
 			justify-content: center;
-			align-items: center;
-			overflow: hidden;
 
 			.card {
-				width: min(40vw, 38rem);
-				min-height: 24rem;
-				margin: 0 auto;
+				width: min(100%, 38rem);
+				margin-inline: auto;
 			}
 		}
 	}
-
-	.column-1 {
-		.goal-font {
-			ul {
-				grid-template-columns: repeat(4, minmax(0, 1fr));
-			}
-		}
-
-		.goal-icon {
-			ul {
-				grid-template-columns: repeat(4, minmax(0, 5rem));
-			}
-		}
-	}
-
-	footer {
-		align-items: center;
-	}
-}

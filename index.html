@@ -13,14 +13,14 @@
 </head>
 <body>
 	<header>
-		<div class="logo"></div>
+		<div class="logo" aria-hidden="true"></div>
 		<h1>Punchy</h1>
 		<p>Set your goals and achieve them!</p>
 	</header>
 
 	<main>
 		<section class="column-1">
-			<form action="">
+			<form>
 				<section class="goal-title">
 					<label for="goal-text">Add your goal!</label>
 					<input id="goal-text" name="goal" type="text" placeholder="Type here" required>
@@ -30,76 +30,80 @@
 					<label for="reward-text">Add your reward!</label>
 					<input id="reward-text" name="reward" type="text" placeholder="e.g. Buy new boots!" required>
 				</section>
-
+<!--  FIGURE OUT FUCTIONALITY 
 				<section class="goal-font">
-					<label for="goal-font-picker">Select a Font</label>
+					<p>Select a font</p>
 					<ul>
-						<li>Font 1</li>
-						<li>Font 2</li>
-						<li>Font 3</li>
-						<li>Font 4</li>
+						<li><button class="font-btn selected" data-font="londrina-shadow" type="button">Londrina Shadow</button></li>
+						
+						<li><button class="font-btn" data-font="bagel-fat-one" type="button">Bagel Fat One</button></li>
+						
+						<li><button class="font-btn" data-font="annie" type="button">Annie</button></li>
+						
+						<li><button class="font-btn" data-font="miniver" type="button">Miniver</button></li>
 					</ul>
-				</section>
+				</section> -->
 
 				<section class="goal-number">
 					<p>How many times do you want to achieve your goal?</p>
 					<ul>
-						<li>1</li>
-						<li>2</li>
-						<li>3</li>
-						<li>4</li>
-						<li>5</li>
-						<li>6</li>
-						<li>7</li>
-						<li>8</li>
+						<li><button class="count-btn" data-count="1" type="button">1</button></li>
+						<li><button class="count-btn" data-count="2" type="button">2</button></li>
+						<li><button class="count-btn" data-count="3" type="button">3</button></li>
+						<li><button class="count-btn" data-count="4" type="button">4</button></li>
+						<li><button class="count-btn" data-count="5" type="button">5</button></li>
+						<li><button class="count-btn" data-count="6" type="button">6</button></li>
+						<li><button class="count-btn" data-count="7" type="button">7</button></li>
+						<li><button class="count-btn" data-count="8" type="button">8</button></li>
 					</ul>
 				</section>
 
 				<section class="goal-icon">
-					<label for="goal-icon-picker">Add a Icon!</label>
+					<p>Add an icon!</p>
 					<ul>
+						<li><button class="icon-btn selected" data-icon="star" type="button">★</button></li>
 						<li><button class="icon-btn" data-icon="smiley" type="button">🙂</button></li>
-						<li><button class="icon-btn" data-icon="star" type="button">★</button></li>
 						<li><button class="icon-btn" data-icon="heart" type="button">♥</button></li>
 						<li><button class="icon-btn" data-icon="check" type="button">✓</button></li>
 					</ul>
 				</section>
 
 				<section class="goal-color">
-					<label for="goal-color-picker">Pick a color</label>
+					<label for="goal-color-picker">Pick a text color</label>
 					<input id="goal-color-picker" type="color" value="#ff0000">
 				</section>
 
 				<section class="card-color">
-					<p>Make it your own!</p>
 					<label for="card-color-picker">Pick a card color</label>
-					<input id="card-color-picker" name="body" type="color" value="#cccccc">
+					<input id="card-color-picker" name="card-color" type="color" value="#cccccc">
 				</section>
 			</form>
 		</section>
 
 		<section class="column-2">
-			<div class="card">
+			<div class="card" id="card">
 				<h2 id="card-text">Get Started!</h2>
+
 				<ul class="punches">
-					<li>1</li>
-					<li>2</li>
-					<li>3</li>
-					<li>4</li>
-					<li>5</li>
-					<li>6</li>
-					<li>7</li>
-					<li>8</li>
+					<li><span class="punch-content">★</span></li>
+					<li><span class="punch-content">★</span></li>
+					<li><span class="punch-content">★</span></li>
+					<li><span class="punch-content">★</span></li>
+					<li><span class="punch-content">★</span></li>
+					<li><span class="punch-content">★</span></li>
+					<li><span class="punch-content">★</span></li>
+					<li><span class="punch-content">★</span></li>
 				</ul>
+
 				<div class="reward-line">
 					<p>Reward:</p>
-					<p class="card-text-reward"></p>
+					<p id="card-reward">Add your reward!</p>
 				</div>
 			</div>
 
 			<section class="buttons">
-				<button id="print" type="button">Save</button>
-				<button id="save" type="button">Print!</button>
+				<button id="save" type="button">Save</button>
+				<button id="print" type="button">Print!</button>
 			</section>
 		</section>
 	</main>

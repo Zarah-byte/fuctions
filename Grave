@@ -1,0 +1,15 @@
+// REDER STAMP GRID
+const goalNumbers = document.querySelectorAll('.goal-number li');
+const punchItems = document.querySelectorAll('.punches li');
+
+goalNumbers.forEach(li => {
+	li.addEventListener('click', () => {
+		const count = Number(li.textContent);
+
+		punchItems.forEach((punch, index) => {
+			if (index < count) {
+				punch.classList.remove('hidden');
+			} else {
+				punch.classList.add('hidden');
+			}
+		});
