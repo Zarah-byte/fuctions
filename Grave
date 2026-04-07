@@ -13,3 +13,452 @@ goalNumbers.forEach(li => {
 				punch.classList.add('hidden');
 			}
 		});
+
+
+		/* ========================
+   FONTS
+======================== */
+@font-face {
+	font-family: "Clarity City";
+	src: url("../fonts/Clarity City/WOFF2/ClarityCity-Regular.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: "Clarity City";
+	src: url("../fonts/Clarity City/WOFF2/ClarityCity-Bold.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 700;
+}
+
+/* ========================
+   VARIABLES
+======================== */
+:root {
+	--bg: #ffffff;
+	--text: #161616;
+	--panel: #ffffff;
+	--preview-bg: #1a1a1a;
+	--preview-card: #d4d4d4;
+	--control-bg: antiquewhite;
+	--border: #1a1a1a;
+	--accent: #ff0000;
+}
+
+html,
+body {
+	min-height: 100vh;
+}
+
+body {
+	font-family: "Clarity City", sans-serif;
+	background-color: var(--bg);
+	color: var(--text);
+	display: flex;
+	flex-direction: column;
+
+	padding-inline: 1rem;
+}
+
+
+header {
+	padding-block: 1rem;
+
+	h1 {
+		font-size: clamp(2rem, 4vw, 3rem);
+		font-weight: 700;
+	}
+
+	p {
+		margin-top: 0.35rem;
+	}
+}
+
+main {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	padding-bottom: 2rem;
+}
+
+form {
+	display: grid;
+	gap: 1.5rem;
+}
+
+input[type="text"] {
+	width: 100%;
+	margin-top: 0.625rem;
+	padding: 0.85rem 1rem;
+	border: 1px solid var(--border);
+	border-radius: 0.75rem;
+	background-color: var(--panel);
+}
+
+input[type="color"] {
+	inline-size: 3rem;
+	block-size: 2.5rem;
+	border-radius: 0.35rem;
+}
+
+ul {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 5rem));
+	gap: 1rem;
+	justify-content: start;
+}
+
+button {
+	background-color: var(--control-bg);
+	border-radius: 1rem;
+	padding: 1rem;
+	text-align: center;
+}
+
+/* ========================
+   COLUMN 1 — CONTROLS
+======================== */
+.column-1 {
+	p,
+	label {
+		display: block;
+	}
+
+	.goal-font,
+	.goal-number,
+	.goal-icon {
+		ul {
+			margin-top: 1rem;
+		}
+	}
+
+	.goal-font {
+		button {
+			width: 100%;
+			min-height: 4.5rem;
+			border: 0.125rem solid transparent;
+
+			&.selected {
+				border-color: var(--border);
+			}
+		}
+
+		.font-btn[data-font="annie"] {
+			font-family: "Annie Use Your Telescope", cursive;
+		}
+
+		.font-btn[data-font="bagel"] {
+			font-family: "Bagel Fat One", system-ui;
+		}
+
+		.font-btn[data-font="miniver"] {
+			font-family: "Miniver", cursive;
+		}
+	}
+
+	.goal-number {
+		button {
+			width: 5rem;
+			height: 5rem;
+			border-radius: 50%;
+			border: 0.125rem solid transparent;
+			cursor: pointer;
+
+			&.selected {
+				border-color: var(--border);
+			}
+		}
+	}
+
+	.goal-icon {
+		button {
+			width: 5rem;
+			height: 5rem;
+			border: 1px solid var(--border);
+			border-radius: 1rem;
+			font-size: 1.75rem;
+
+			&.selected {
+				outline: 0.125rem solid var(--border);
+			}
+		}
+	}
+}
+
+/* ========================
+   COLUMN 2 — PREVIEW
+======================== */
+.column-2 {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+
+	.card {
+		min-height: 24rem;
+		padding: 1.5rem;
+		border-radius: 1rem;
+		background-color: var(--preview-card);
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-evenly;
+		gap: 1.5rem;
+
+		h2 {
+			font-size: clamp(1.75rem, 4vw, 3rem);
+			font-weight: 700;
+		}
+	}
+
+	.punches {
+		li {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 5rem;
+			height: 5rem;
+			border-radius: 50%;
+			background-color: rgba(0, 0, 0, 0.3);
+			font-size: 1.5rem;
+		}
+	}
+
+	.reward-line {
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.buttons {
+		display: flex;
+		gap: 1rem;
+
+		button {
+			flex: 1;
+		}
+	}
+}
+
+.hidden {
+	display: none !important;
+}
+
+footer {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	flex-wrap: wrap;
+	margin-top: auto;
+	padding-block: 1rem;
+}
+
+/* ========================
+  PRINT
+======================== */
+@media print {
+	body * {
+	visibility: hidden;
+	}
+
+	.card {
+	border: #161616 .02rem solid;
+	visibility: visible;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	}
+
+	.card * {
+	  visibility: visible;
+	}
+
+	/* '*' selectes alll children of the .card */
+
+	header,
+	footer,
+	.column-1,
+	.buttons {
+	display: none;
+	}
+}
+
+/* ========================
+   TABLET + DESKTOP
+======================== */
+@media (min-width: 48rem) {
+	header {
+		padding-top: 0.75rem;
+	}
+
+	main {
+		flex-direction: row;
+		align-items: stretch;
+		}
+
+		.column-1 {
+			flex: 1;
+			min-width: 0;
+
+			padding-right: 1rem;
+		}
+
+		.column-2 {
+			flex: 1;
+			min-width: 0;
+
+			background-color: var(--preview-bg);
+			padding: 2rem;
+			border-radius: 1rem;
+			justify-content: center;
+
+			.card {
+				width: min(100%, 38rem);
+				margin-inline: auto;
+			}
+		}
+	}
+
+
+
+
+
+
+	// AI Link https://claude.ai/share/3e4dbf9c-7b90-4bea-bfde-2ccf5f829bce
+
+// LIVE TEXT RENDER - HEADING
+let goalInput = document.getElementById('goal-text');
+//Find the HTML element with the id goal-text and store it in a variable called goalInput.
+let goalCard = document.getElementById('card-text');
+//Find the element with the id card-text and save it as goalCard so JavaScript can use it later.
+
+goalInput.addEventListener('input', function () {
+	let value = goalInput.value;
+
+	if (value !== '') {
+		goalCard.textContent = value;
+	}
+
+	if (value === '') {
+		goalCard.textContent = 'Get Started!';
+	}
+});
+
+// LIVE TEXT RENDER - REWARD
+let rewardInput = document.getElementById('reward-text');
+let rewardCard = document.getElementById('card-reward');
+
+rewardInput.addEventListener('input', function () {
+	let value = rewardInput.value;
+
+	if (value !== '') {
+		rewardCard.textContent = value;
+	}
+
+	if (value === '') {
+		rewardCard.textContent = 'add your reward';
+	}
+});
+
+// RENDER STAMP GRID
+let countBtns = document.querySelectorAll('.count-btn');
+let punchItems = document.querySelectorAll('.punches li');
+
+countBtns.forEach(function (btn) {
+	btn.addEventListener('click', function () {
+		countBtns.forEach(function (b) {
+			b.classList.remove('selected');
+		});
+
+		btn.classList.add('selected');
+
+		let count = Number(btn.dataset.count);
+
+		punchItems.forEach(function (punch, index) {
+			if (index < count) {
+				punch.classList.remove('hidden');
+			}
+
+			if (index >= count) {
+				punch.classList.add('hidden');
+			}
+		});
+	});
+});
+
+// ICONS IN STAMP GRID
+let icons = {
+	smiley: '🙂',
+	star: '★',
+	heart: '♥',
+	check: '✓'
+};
+
+let currentIcon = '★';
+
+let iconBtns = document.querySelectorAll('.icon-btn');
+
+iconBtns.forEach(function (btn) {
+	btn.addEventListener('click', function () {
+		iconBtns.forEach(function (b) {
+			b.classList.remove('selected');
+		});
+
+		btn.classList.add('selected');
+		currentIcon = icons[btn.dataset.icon];
+		applyIconToGrid();
+	});
+});
+
+function applyIconToGrid() {
+	let punchItems = document.querySelectorAll('.punches li');
+
+	punchItems.forEach(function (li) {
+		let content = li.querySelector('.punch-content');
+
+		if (content) {
+			content.textContent = currentIcon;
+		}
+
+		if (!content) {
+			li.textContent = currentIcon;
+		}
+	});
+}
+
+/* LIVE COLOR RENDER BACKGROUND + TEXT */
+
+let goalColorPicker = document.getElementById('goal-color-picker');
+let cardColorPicker = document.getElementById('card-color-picker');
+let card = document.getElementById('card');
+
+if (goalColorPicker && card) {
+	card.style.color = goalColorPicker.value;
+
+	goalColorPicker.addEventListener('input', function (event) {
+		card.style.color = event.target.value;
+	});
+}
+
+if (cardColorPicker && card) {
+	card.style.backgroundColor = cardColorPicker.value;
+
+	cardColorPicker.addEventListener('input', function (event) {
+		card.style.backgroundColor = event.target.value;
+	});
+}
+
+// FONT CHANGE RENDER
+
+// PRINT STUFF
+let printBtn = document.getElementById('print');
+
+if (printBtn) {
+	printBtn.addEventListener('click', function () {
+		window.print();
+	});
+}

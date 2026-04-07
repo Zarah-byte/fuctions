@@ -1,111 +1,93 @@
-// AI Link https://claude.ai/share/3e4dbf9c-7b90-4bea-bfde-2ccf5f829bce
-// LIVE TEXT RENDER - HEADING
-const goalInput = document.getElementById('goal-text');
-const goalCard = document.getElementById('card-text');
 
-goalInput.addEventListener('input', (e) => {
-	const value = e.target.value;
-	goalCard.textContent = value !== '' ? value : 'Get Started!';
-});
+// SECTION TRANSITIONS IE GOING FROM 'ONE PAGE' TO ANATHOR
+let stepOneButton = document.getElementById('step-01');
+let coverSection = document.getElementById('cover');
+let goalTitleSection = document.getElementById('goal-title');
 
-
-// LIVE TEXT RENDER - REWARD
-const rewardInput = document.getElementById('reward-text');
-const rewardCard = document.getElementById('card-reward');
-
-rewardInput.addEventListener('input', (e) => {
-	const value = e.target.value;
-	rewardCard.textContent = value !== '' ? value : 'Add your reward!';
-});
-
-
-// RENDER STAMP GRID
-const countBtns = document.querySelectorAll('.count-btn');
-const punchItems = document.querySelectorAll('.punches li');
-
-countBtns.forEach(btn => {
-		btn.addEventListener('click', () => {
-				// Toggle selected state
-				countBtns.forEach(b => b.classList.remove('selected'));
-				btn.classList.add('selected');
-
-				const count = Number(btn.dataset.count);
-
-				punchItems.forEach((punch, index) => {
-						if (index < count) {
-								punch.classList.remove('hidden');
-						} else {
-								punch.classList.add('hidden');
-						}
-				});
-		});
-});
-
-// ICONS IN STAMP GRID
-const icons = {
-	smiley: '🙂',
-	star: '★',
-	heart: '♥',
-	check: '✓'
-};
-
-let currentIcon = '★';
-
-const iconBtns = document.querySelectorAll('.icon-btn');
-
-iconBtns.forEach((btn) => {
-	btn.addEventListener('click', () => {
-		iconBtns.forEach((b) => b.classList.remove('selected'));
-		btn.classList.add('selected');
-
-		currentIcon = icons[btn.dataset.icon];
-		applyIconToGrid();
-	});
-});
-
-function applyIconToGrid() {
-	const punchItems = document.querySelectorAll('.punches li');
-
-	punchItems.forEach((li) => {
-		const content = li.querySelector('.punch-content');
-
-		if (content) {
-			content.textContent = currentIcon;
-		} else {
-			li.textContent = currentIcon;
+if (stepOneButton) {
+	if (coverSection) {
+		if (goalTitleSection) {
+			stepOneButton.addEventListener('click', function () {
+				if (coverSection.classList.contains('hidden') === false) {
+					coverSection.classList.add('hidden');
+					goalTitleSection.classList.remove('hidden');
+				}
+			});
 		}
-	});
+	}
+}
+//my understanding 
+
+// let stepOneButton = document.getElementById('step-01');
+// let coverSection = document.getElementById('cover');
+// let goalTitleSection = document.getElementById('goal-title');
+
+// defines variables 
+
+//if (stepOneButton) {
+//	if (coverSection) {
+//		if (goalTitleSection) {
+
+// says if all 3 exsist do the following 
+
+// stepOneButton.addEventListener('click', function () {
+// 	if (coverSection.classList.contains('hidden') === false) {
+// 		coverSection.classList.add('hidden');
+// 		goalTitleSection.classList.remove('hidden');
+
+// When clicked, check that the cover is currently visible if it is visible then hide the cover and show the goal-title section
+
+let stepTwoButton = document.getElementById('step-02');
+
+let goalInput = document.getElementById('goal-text');
+let rewardInput = document.getElementById('reward-text');
+
+let goalNumberSection = document.getElementById('goal-number');
+
+if (stepTwoButton) {
+	if (goalInput) {
+		if (rewardInput) {
+			if (goalTitleSection) {
+				if (goalNumberSection) {
+					stepTwoButton.addEventListener('click', function () {
+						let goalValue = goalInput.value.trim();
+						let rewardValue = rewardInput.value.trim();
+
+						if (goalValue !== '' && rewardValue !== '') {
+							goalTitleSection.classList.add('hidden');
+							goalNumberSection.classList.remove('hidden');
+						}
+					});
+				}
+			}
+		}
+	}
 }
 
-// LIVE COLOR RENDER BACKGROUND + TEXT
-const goalColorPicker = document.getElementById('goal-color-picker');
-const cardColorPicker = document.getElementById('card-color-picker');
-const card = document.getElementById('card');
+//my understanding 
 
-if (goalColorPicker && card) {
-	card.style.color = goalColorPicker.value;
-	goalColorPicker.addEventListener('input', (event) => {
-		card.style.color = event.target.value;
-	});
+
+if (stepThreeButton) {
+	if (goalInput) {
+		if (rewardInput) {
+			if (goalTitleSection) {
+				if (goalNumberSection) {
+					stepTwoButton.addEventListener('click', function () {
+						let goalValue = goalInput.value.trim();
+						let rewardValue = rewardInput.value.trim();
+
+						if (goalValue !== '' && rewardValue !== '') {
+							goalTitleSection.classList.add('hidden');
+							goalNumberSection.classList.remove('hidden');
+						}
+					});
+				}
+			}
+		}
+	}
 }
 
-if (cardColorPicker && card) {
-	card.style.backgroundColor = cardColorPicker.value;
-	cardColorPicker.addEventListener('input', (event) => {
-		card.style.backgroundColor = event.target.value;
-	});
-}
 
-// FONT CHANGE RENDER 
-
-// PRINT STUFF
-const printBtn = document.getElementById('print');
-
-printBtn.addEventListener('click', () => {
-  window.print();
-});
-
-//FILE SAVE STUFF
 
 
 

@@ -15,21 +15,47 @@
 	<link href="https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&family=Bagel+Fat+One&family=Londrina+Shadow&family=Miniver&display=swap" rel="stylesheet">
 </head>
 <body>
-	<header>
-		<div class="logo" aria-hidden="true"></div>
-		<h1>Punchy</h1>
-		<p>Set your goals and achieve them!</p>
-	</header>
-
 	<main>
-		<section class="column-1">
+		<section id="cover" class="show">
+			<h1>Punch</h1>
+			<p>Hi there!<br>Welcome to Punchy!</p>
+			<p>here is how this works</p>
+			<ul>
+				<li>
+					<em>Step 1</em> type your goal 
+				</li>
+				<li>
+					<em>Step 2</em> pick how many times you want to achieve your goal
+				</li>
+				<li>
+					<em>Step 3</em> customize! 
+				</li>
+				<li>
+					<em>Step 4</em> print
+				</li>
+			</ul>
+
+			<button id="step-01" type="button">
+				<p>Lets get started!</p>
+			</button>
+		</section>
+
 			<form>
-				<section class="goal-title">
+				<section id="goal-title" class="hidden">
 					<label for="goal-text">Add your goal!</label>
 					<input id="goal-text" name="goal" type="text" placeholder="Type here" required>
+
+					<div class="back-next-button">
+						<button section="back">
+							<p>back</p>
+						</button>
+						<button id="step-02">
+							<p>Next</p>
+						</button>
+					</div>
 				</section>
 
-				<section class="reward-title">
+				<section id="reward-title" class="hidden">
 					<label for="reward-text">Add your reward!</label>
 					<input id="reward-text" name="reward" type="text" placeholder="e.g. Buy new boots!" required>
 				</section>
@@ -47,7 +73,7 @@
 					</ul>
 				</section> -->
 
-				<section class="goal-number">
+				<section id="goal-number" class="hidden">
 					<p>How many times do you want to achieve your goal?</p>
 					<ul>
 						<li><button class="count-btn" data-count="1" type="button">1</button></li>
@@ -61,7 +87,7 @@
 					</ul>
 				</section>
 
-				<section class="goal-icon">
+				<section id="goal-icon" class="hidden">
 					<p>Add an icon!</p>
 					<ul>
 						<li><button class="icon-btn selected" data-icon="star" type="button">★</button></li>
@@ -71,18 +97,18 @@
 					</ul>
 				</section>
 
-				<section class="goal-color">
+				<section id="goal-color" class="hidden">
 					<label for="goal-color-picker">Pick a text color</label>
 					<input id="goal-color-picker" type="color" value="#ff0000">
 				</section>
 
-				<section class="card-color">
+				<section id="card-color" class="hidden">
 					<label for="card-color-picker">Pick a card color</label>
 					<input id="card-color-picker" name="card-color" type="color" value="#cccccc">
 				</section>
 			</form>
-		</section>
-
+		
+<!-- 
 		<section class="column-2">
 			<div class="card" id="card">
 				<h2 id="card-text">Get Started!</h2>
@@ -108,7 +134,7 @@
 				<button id="save" type="button">Save</button>
 				<button id="print" type="button">Print!</button>
 			</section>
-		</section>
+		</section> -->
 	</main>
 
 	<footer>
