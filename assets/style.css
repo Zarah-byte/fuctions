@@ -10,11 +10,10 @@ body {
 }
 
 .hidden {
-	display: none;
+	display: none!important;
 }
 
 main {
-	
 	.hidden {
 		display: none;
 	}
@@ -28,7 +27,7 @@ main {
 		button {
 			padding: 1rem 2rem;
 			background: rgb(203, 174, 250);
-			background: linear-gradient(0deg, rgb(203, 174, 250), 1) 0%, rgba(129, 5, 240, 1) 100%);
+			background: linear-gradient(0deg, rgba(203, 174, 250, 1) 0%, rgba(129, 5, 240, 1) 100%);
 			border-radius: 100rem;
 			position: relative;
 		
@@ -59,13 +58,41 @@ main {
 			justify-content: space-between;
 		}
 
-		#goal-title {
+		#goal-title, #reward-title, #goal-number, {
 			display: flex;
 			flex-direction: column;
 		}
 	}
-}
 
+	#card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1rem;
+	}
+	
+	.card-layout {
+		/* width: 100%;
+		max-width: 24rem; */
+		padding: 1.5rem;
+		border-radius: 1rem;
+
+		width: 3.5in;
+		aspect-ratio: 1.75 / 1;
+	}
+
+	.punches {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 0.5rem;
+	}
+	
+	.buttons {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+	}
+}
 
 footer {
 	display: flex;
@@ -77,6 +104,38 @@ footer {
 	margin-bottom: 1rem;
 }
 
+
+/* ========================
+   PRINT
+======================== */
+@media print {
+	body * {
+		visibility: hidden;
+	}
+
+	.card-layout,
+	.card-layout * {
+		visibility: visible;
+	}
+
+	.card-layout {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 3.5in;
+		aspect-ratio: 1.75 / 1;
+		max-width: none;
+		margin: 0;
+		border-radius: 0;
+		box-shadow: none;
+	}
+
+	.buttons,
+	footer {
+		display: none !important;
+	}
+}
+
 /* ========================
    TABLET + DESKTOP
 ======================== */
@@ -85,5 +144,13 @@ footer {
 	footer {
 		flex-direction: row;
 		justify-content: space-between;
+	}
+
+	#card {
+		padding: 1.5rem;
+		border-radius: 1rem;
+
+		width: 100rem;
+		aspect-ratio: 1.75 / 1;
 	}
 }
