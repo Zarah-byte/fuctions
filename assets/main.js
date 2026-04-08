@@ -1,3 +1,5 @@
+// AI Link: https://claude.ai/share/3e4dbf9c-7b90-4bea-bfde-2ccf5f829bce
+
 // VARIABLES
 let sections = Array.from(
 	document.querySelectorAll(

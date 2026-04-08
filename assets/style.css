@@ -58,7 +58,7 @@ main {
 			justify-content: space-between;
 		}
 
-		#goal-title, #reward-title, #goal-number, {
+		#goal-title, #reward-title, #goal-number,"goal-icon","goal-color","card-color" {
 			display: flex;
 			flex-direction: column;
 		}
@@ -102,6 +102,10 @@ footer {
 	gap: .2rem;
 
 	margin-bottom: 1rem;
+	position: fixed;
+  	left: 0;
+  	bottom: 0;
+  	width: 100%;
 }
 
 
