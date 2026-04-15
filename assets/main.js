@@ -557,3 +557,62 @@ function loadFormState() {
 
 loadFormState();
 // this rus everything
+
+
+// MAKE A NEW CARD BUTTON
+let returnToStartButton = document.getElementById('return-to-start');
+let cardForm = document.getElementById('card-form');
+
+if (returnToStartButton) {
+	returnToStartButton.addEventListener('click', function () {
+		// reset all form fields back to their original HTML values
+		cardForm.reset();
+
+		// remove selected state from all count buttons
+		for (let i = 0; i < countButtons.length; i++) {
+			countButtons[i].classList.remove('selected');
+		}
+
+		// remove selected state from all icon buttons
+		for (let i = 0; i < iconButtons.length; i++) {
+			iconButtons[i].classList.remove('selected');
+		}
+
+		// put the default icon back on the first icon button
+		if (iconButtons.length > 0) {
+			iconButtons[0].classList.add('selected');
+		}
+
+		// hide every section
+		for (let i = 0; i < sections.length; i++) {
+			sections[i].classList.add('hidden');
+		}
+
+		// show the cover again
+		document.getElementById('cover').classList.remove('hidden');
+
+		// clear saved progress from local storage
+		localStorage.clear('punchyFormState');
+		// googled how to clear local storage - got it frm mdn: https://developer.mozilla.org/en-US/docs/Web/API/Storage/clear
+
+		// redraw the preview card with the reset/default values
+		updateCardPreview();
+	});
+}
+
+//MY UNDERSTANDING:
+//when that button is clicked, the form is reset back to its starting values.
+
+//cardForm.reset() resets the text inputs and color pickers to their original HTML values.
+
+//the loops remove selected from all count buttons and icon buttons.
+
+//then the first icon button gets selected again because that is the default starting icon.
+
+//the sections loop hides every screen in the wizard.
+
+//then cover is shown again so the user goes back to the beginning.
+
+//localStorage.clear('punchyFormState') deletes the saved progress so the new card starts fresh.
+
+//updateCardPreview() redraws the preview so it matches the reset values.
