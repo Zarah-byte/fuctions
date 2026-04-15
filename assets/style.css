@@ -182,12 +182,17 @@ form,
 }
 
 .back-next-button {
-	padding-top: 7rem;
-
-	margin-bottom: 1rem;
+	position: fixed;
 	left: 0;
-	bottom: 0;
+	bottom: 3rem;
 	width: 100%;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+	padding-left: 1rem;
+	padding-right: 1rem;
 }
 
 .goal-number {
@@ -318,13 +323,6 @@ label {
 form {
 	text-align: center;
 
-	.back-next-button {
-		display: flex;
-		flex-direction: row;
-
-		justify-content: space-between;
-	}
-
 	#goal-title,
 	#reward-title,
 	#goal-number,
@@ -426,22 +424,34 @@ footer {
 ======================== */
 @media (width > 768px) {
 		main {
-			width: 40vh;
+			width: 60vh;
 			margin-inline: auto;
+			display: block;
 		}
 	
+		#cover {
+			gap: 2rem;
+
+			ul {
+				gap: 2rem;
+			}
+		}
+
+		
 		#card {
 			width: 100%;
 			margin-top: 4rem;
 		}
 	
 	footer {
-		flex-direction: row;
-		justify-content: space-between;
-
 		padding-left: 2rem;
 		padding-right: 2rem;
 	}
 
+	.back-next-button {
+		width: 40vh;
+		left: 50%;
+		transform: translateX(-50%);
+	}
 	
 }
