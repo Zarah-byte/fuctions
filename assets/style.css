@@ -1,100 +1,381 @@
-
-body {
-	font-family: "Clarity City", sans-serif;
-	background-color: var(--bg);
-	color: var(--text);
-	display: flex;
-	flex-direction: column;
-
-	padding-inline: 1rem;
+@font-face {
+	font-family: "DT Getai Grotesk Display";
+	src: url("../fonts/DT Getai Grotesk/DTGetaiGroteskDisplay-Black.otf") format("opentype"),
+		url("../fonts/DT Getai Grotesk/DTGetaiGroteskDisplay-Black.ttf") format("truetype");
+	font-weight: 900;
+	font-style: normal;
 }
 
-.hidden {
-	display: none!important;
+:root {
+	--heading: "DT Getai Grotesk Display", sans-serif;
+	--body-copy: "Solitus", sans-serif;
+
+	--bg: #FFDCE4;
+	--text: #000000;
+}
+
+body {
+	font-family: var(--body-copy);
+	font-size: 1.3rem;
+	background-color: var(--bg);
+	color: var(--text);
+
+	display: flex;
+	flex-direction: column;
+	padding-inline: 1rem;
+	padding-bottom: 5rem;
 }
 
 main {
-	.hidden {
-		display: none;
+	width: 100%;
+}
+
+h1 {
+	font-family: var(--heading);
+	font-weight: 900;
+	font-size: 3rem;
+	letter-spacing: -2px;
+
+	rotate: 4deg;
+
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+.about {
+	text-align: center;
+	margin-left: 3rem;
+	margin-right: 3rem;
+
+	margin-bottom: 1rem;
+}
+
+.shake {
+	animation: shake 0.4s ease;
+}
+
+/* used this ref to undestand the shake: https://codepen.io/dmytrous/pen/vgoWxY */
+@keyframes shake {
+	0% {
+		transform: translateX(0);
 	}
 
-	#cover {
-		height: 90vh;
-		width: 100vw;
-
-		text-align: center;
-
-		button {
-			padding: 1rem 2rem;
-			background: rgb(203, 174, 250);
-			background: linear-gradient(0deg, rgba(203, 174, 250, 1) 0%, rgba(129, 5, 240, 1) 100%);
-			border-radius: 100rem;
-			position: relative;
-		
-			&::before {
-				content: "";
-				height: 0%;
-				width: 2px;
-				position: absolute;
-			}
-		
-			&:hover {
-				box-shadow:
-					4px 4px 6px 0 rgba(255, 255, 255, 0.5),
-					-4px -4px 6px 0 rgba(116, 125, 136, 0.5),
-					inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2),
-					inset 4px 4px 6px 0 rgba(0, 0, 0, 0.4);
-			}
-		}
+	20% {
+		transform: translateX(-8px);
 	}
 
-	form {
-		text-align: center;
-
-		.back-next-button {
-			display: flex;
-			flex-direction: row;
-
-			justify-content: space-between;
-		}
-
-		#goal-title, #reward-title, #goal-number,"goal-icon","goal-color","card-color" {
-			display: flex;
-			flex-direction: column;
-		}
+	40% {
+		transform: translateX(8px);
 	}
 
-	#card {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 1rem;
-	}
-	
-	.card-layout {
-		/* width: 100%;
-		max-width: 24rem; */
-		padding: 1.5rem;
-		border-radius: 1rem;
-
-		width: 3.5in;
-		aspect-ratio: 1.75 / 1;
+	60% {
+		transform: translateX(-6px);
 	}
 
-	.punches {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		gap: 0.5rem;
+	80% {
+		transform: translateX(6px);
 	}
-	
-	.buttons {
-		display: flex;
-		gap: 1rem;
-		justify-content: center;
+
+	100% {
+		transform: translateX(0);
 	}
 }
 
+.steps {
+	text-align: left;
+
+	span {
+		font-family: var(--heading);
+		background-color: #fff;
+		border-radius: 100%;
+		padding: 1rem;
+		margin: 1.5rem;
+	}
+}
+
+main {
+	width: 100%;
+}
+
+#cover,
+form,
+#card {
+	width: 100%;
+}
+
+
+
+#step-01 {
+	position: relative;
+	display: inline-block;
+	/* width: 250px; */
+	/* margin: 20px auto; */
+	padding: 2rem;
+
+	background: #fff;
+	border: 1px solid #fff;
+	border-radius: 100%;
+
+	color: #000;
+	text-align: center;
+	text-transform: uppercase;
+
+	box-shadow: none;
+	transform: rotate(-2deg);
+	transition: all 250ms ease-out;
+}
+
+#step-01::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+
+	border-radius: inherit;
+	box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+
+	transform: translateY(2px);
+	transition: all 250ms ease-out;
+}
+
+#step-01:hover {
+	border-color: #dedede;
+	box-shadow:
+		0 1px 4px rgba(0, 0, 0, 0.3),
+		0 0 40px rgba(128, 128, 128, 0.1) inset;
+	transform: rotate(0deg) translateY(-1px);
+}
+
+#step-01:hover::before {
+	box-shadow:
+		0 10px 12px -8px rgba(31, 31, 31, 0.35);
+	transform: translateY(1px);
+}
+
+.hidden {
+	display: none !important;
+}
+
+.addgoal,
+.reward-title {
+	background-color: #FFFBEE;
+	display: flex;
+	flex-direction: column;
+
+	text-align: center;
+
+	margin-top: 2rem;
+	padding-top: 4rem;
+	padding-bottom: 4rem;
+	border-radius: .5rem;
+}
+
+.forward-button,
+.back-button {
+	background-color: #fff;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	padding-left: 1.2rem;
+	padding-right: 1.2rem;
+
+	border-radius: 100%;
+}
+
+.back-next-button {
+	padding-top: 7rem;
+
+	margin-bottom: 1rem;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+
+.goal-number {
+	background-color: #FFFBEE;
+	display: block;
+	align-items: center;
+
+	margin-top: 2rem;
+	padding-top: 4rem;
+	padding-bottom: 4rem;
+
+	padding-left: 2rem;
+	padding-right: 2rem;
+	border-radius: .5rem;
+	
+	ul {
+		display: grid;
+		grid-template-columns: repeat(2, 2fr);
+		align-items: center;
+
+		gap: 1rem;
+		align-items: center;
+		padding-top: 2rem;
+
+		.count-btn {
+			width: 5rem;
+			height: 5rem;
+			border-radius: 50%;
+			background-color: #ffff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+}
+.goal-icon {
+	background-color: #FFFBEE;
+	display: flex;
+	flex-direction: column;
+
+	text-align: center;
+
+	margin-top: 2rem;
+	padding-top: 4rem;
+	padding-bottom: 4rem;
+	border-radius: .5rem;
+
+	ul{
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+		align-items: center;
+		padding-top: 2rem;
+
+		padding-left: 1.25rem;
+
+		li {
+			width: 4rem;
+			height: 4rem;
+			border-radius: 50%;
+			background-color: #ffff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+}
+
+.goal-color, .card-color {
+	background-color: #FFFBEE;
+	display: flex;
+	flex-direction: column;
+
+	text-align: center;
+
+	margin-top: 2rem;
+	padding-top: 4rem;
+	padding-bottom: 4rem;
+	border-radius: .5rem;
+}
+
+/* adapted from: https://codepen.io/radiantsunrise08/pen/QWzJRbo */
+input[type="color" i] {
+	display: block;
+	margin-inline: auto;
+	border-radius: 50%;
+	inline-size: 5rem;
+	block-size: 5rem;
+	
+	/* Can set padding between outer circle and color swatch for Firefox here;
+	 * it doesn't support a color-swarch-wrapper pseudoclass
+	 */
+	padding: 3px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(153, 153, 153);
+  }
+  
+  /* Affects area between outer circle and color swatch. Firefox doesn't have an equivalent. */
+  input[type="color" i]::-webkit-color-swatch-wrapper {
+	padding: 1px;
+  }
+  
+  /* Affects the inner circle, i.e. the current color selection */
+  input[type="color" i]::-webkit-color-swatch {
+	border-radius: 50%;
+  }
+  
+  input[type="color" i]::-moz-color-swatch {
+	border-radius: 50%;
+  }
+  
+  div {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+  }
+
+label {
+	font-size: 1.5rem;
+	padding-bottom: 1rem;
+}
+
+::placeholder {
+	opacity: 50%;
+}
+
+form {
+	text-align: center;
+
+	.back-next-button {
+		display: flex;
+		flex-direction: row;
+
+		justify-content: space-between;
+	}
+
+	#goal-title,
+	#reward-title,
+	#goal-number,
+	#goal-icon,
+	#goal-color,
+	#card-color {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+#card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+
+	margin-top: 10rem;
+}
+
+.card-layout {
+	padding: 1.5rem;
+	border-radius: 1rem;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	width: 3.5in;
+	aspect-ratio: 1.75 / 1;
+}
+
+#print, #return-to-start {
+	background-color: #fff;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	padding-left: 1.2rem;
+	padding-right: 1.2rem;
+
+	border-radius: 100%;
+
+}
+
+.punches {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 0.5rem;
+}
+
 footer {
+	font-size: 1rem;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -103,9 +384,9 @@ footer {
 
 	margin-bottom: 1rem;
 	position: fixed;
-  	left: 0;
-  	bottom: 0;
-  	width: 100%;
+	left: 0;
+	bottom: 0;
+	width: 100%;
 }
 
 
@@ -144,17 +425,23 @@ footer {
    TABLET + DESKTOP
 ======================== */
 @media (width > 768px) {
-
+		main {
+			width: 40vh;
+			margin-inline: auto;
+		}
+	
+		#card {
+			width: 100%;
+			margin-top: 4rem;
+		}
+	
 	footer {
 		flex-direction: row;
 		justify-content: space-between;
+
+		padding-left: 2rem;
+		padding-right: 2rem;
 	}
 
-	#card {
-		padding: 1.5rem;
-		border-radius: 1rem;
-
-		width: 100rem;
-		aspect-ratio: 1.75 / 1;
-	}
+	
 }

@@ -17,24 +17,25 @@
 <body>
 	<main>
 		<section id="cover" class="show">
-			<h1>Punch</h1>
-			<p>Hi there!<br>Welcome to Punchy!</p>
-			<p>here is how this works</p>
-			<ul>
-				<li>
-					<em>Step 1</em> type your goal 
-				</li>
-				<li>
-					<em>Step 2</em> pick how many times you want to achieve your goal
-				</li>
-				<li>
-					<em>Step 3</em> customize! 
-				</li>
-				<li>
-					<em>Step 4</em> print
-				</li>
-			</ul>
+				<h1>punchy</h1>
+				<p class="about">lets achieve your goals one punch at a time. In two minutes you can design your own personalized punch card habit tracker no design skills required!</p>
+				<ul class="steps">
+					<li>
+						<span>01</span>Set your goal
+					</li>
+					<li>
+						<span>02</span>Add a reward
+					</li>
+					<li>
+						<span>02</span>customize <3
+					</li>
 
+					<li>
+						<span>03</span> print!
+					</li>
+				</ul>
+
+			
 			<button id="step-01" type="button">
 				<p>Lets get started!</p>
 			</button>
@@ -42,112 +43,167 @@
 
 			<form id="card-form">
 				<section id="goal-title" class="hidden">
-					<label for="goal-text">Add your goal!</label>
-					<input id="goal-text" name="goal" type="text" placeholder="Type here" required>
+					<section class="addgoal">
+						<label for="goal-text">Add your goal!</label>
+						<input id="goal-text" name="goal" type="text" placeholder="Type here" required>
+					</section>
+
+					<section class="reward-title">
+						<label for="reward-text">Add your reward!</label>
+						<input id="reward-text" name="reward" type="text" placeholder="e.g. Buy new boots!" required>
+					</section>
 
 					<div class="back-next-button">
 						<button class="back-button" type="button">
-							<p>back</p>
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<mask id="mask0_399_120" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+								<rect width="24" height="24" fill="#D9D9D9"/>
+								</mask>
+								<g mask="url(#mask0_399_120)">
+								<path d="M7.825 13L13.425 18.6L12 20L4 12L12 4L13.425 5.4L7.825 11H20V13H7.825Z" fill="#1C1B1F"/>
+								</g>
+								</svg>
+								
 						</button>
-						<button id="step-02" type="button">
-							<p>Next</p>
+						<button id="step-02" class="forward-button" type="button">
+							<svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<mask id="mask0_399_156" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-1" y="0" width="28" height="27">
+								<rect x="23.8455" y="26.5641" width="24" height="24" transform="rotate(-173.496 23.8455 26.5641)" fill="#D9D9D9"/>
+								</mask>
+								<g mask="url(#mask0_399_156)">
+								<path d="M17.5436 12.7615L12.614 6.56323L14.1884 5.33366L21.2307 14.1884L12.376 21.2307L11.1188 19.6783L17.3171 14.7486L5.22044 13.3695L5.44698 11.3824L17.5436 12.7615Z" fill="#1C1B1F"/>
+								</g>
+								</svg>
 						</button>
 					</div>
 				</section>
-
-				<section id="reward-title" class="hidden">
-					<label for="reward-text">Add your reward!</label>
-					<input id="reward-text" name="reward" type="text" placeholder="e.g. Buy new boots!" required>
-					
-					<div class="back-next-button">
-						<button class="back-button" type="button">
-							<p>back</p>
-						</button>
-						<button id="step-03" type="button">
-							<p>Next</p>
-						</button>
-					</div>
-				</section>
-<!--  FIGURE OUT FUCTIONALITY 
-				<section class="goal-font">
-					<p>Select a font</p>
-					<ul>
-						<li><button class="font-btn selected" data-font="londrina-shadow" type="button">Londrina Shadow</button></li>
-						
-						<li><button class="font-btn" data-font="bagel-fat-one" type="button">Bagel Fat One</button></li>
-						
-						<li><button class="font-btn" data-font="annie" type="button">Annie</button></li>
-						
-						<li><button class="font-btn" data-font="miniver" type="button">Miniver</button></li>
-					</ul>
-				</section> -->
 
 				<section id="goal-number" class="hidden">
-					<p>How many times do you want to achieve your goal?</p>
-					<ul>
-						<li><button class="count-btn" data-count="1" type="button">1</button></li>
-						<li><button class="count-btn" data-count="2" type="button">2</button></li>
-						<li><button class="count-btn" data-count="3" type="button">3</button></li>
-						<li><button class="count-btn" data-count="4" type="button">4</button></li>
-						<li><button class="count-btn" data-count="5" type="button">5</button></li>
-						<li><button class="count-btn" data-count="6" type="button">6</button></li>
-						<li><button class="count-btn" data-count="7" type="button">7</button></li>
-						<li><button class="count-btn" data-count="8" type="button">8</button></li>
-					</ul>
+					<section class="goal-number">
+						<p>How many times do you want to achieve your goal?</p>
+						<ul>
+							<li><button class="count-btn" data-count="1" type="button">1</button></li>
+							<li><button class="count-btn" data-count="2" type="button">2</button></li>
+							<li><button class="count-btn" data-count="3" type="button">3</button></li>
+							<li><button class="count-btn" data-count="4" type="button">4</button></li>
+							<li><button class="count-btn" data-count="5" type="button">5</button></li>
+							<li><button class="count-btn" data-count="6" type="button">6</button></li>
+							<li><button class="count-btn" data-count="7" type="button">7</button></li>
+							<li><button class="count-btn" data-count="8" type="button">8</button></li>
+						</ul>
+					</section>
 
 					<div class="back-next-button">
 						<button class="back-button" type="button">
-							<p>back</p>
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<mask id="mask0_399_120" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+								<rect width="24" height="24" fill="#D9D9D9"/>
+								</mask>
+								<g mask="url(#mask0_399_120)">
+								<path d="M7.825 13L13.425 18.6L12 20L4 12L12 4L13.425 5.4L7.825 11H20V13H7.825Z" fill="#1C1B1F"/>
+								</g>
+								</svg>
 						</button>
-						<button id="step-04" type="button">
-							<p>Next</p>
+						
+						<button id="step-02" class="forward-button" type="button">
+							<svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<mask id="mask0_399_156" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-1" y="0" width="28" height="27">
+								<rect x="23.8455" y="26.5641" width="24" height="24" transform="rotate(-173.496 23.8455 26.5641)" fill="#D9D9D9"/>
+								</mask>
+								<g mask="url(#mask0_399_156)">
+								<path d="M17.5436 12.7615L12.614 6.56323L14.1884 5.33366L21.2307 14.1884L12.376 21.2307L11.1188 19.6783L17.3171 14.7486L5.22044 13.3695L5.44698 11.3824L17.5436 12.7615Z" fill="#1C1B1F"/>
+								</g>
+								</svg>
 						</button>
 					</div>
 				</section>
 
 				<section id="goal-icon" class="hidden">
-					<p>Add an icon!</p>
-					<ul>
-						<li><button class="icon-btn selected" data-icon="star" type="button">★</button></li>
-						<li><button class="icon-btn" data-icon="smiley" type="button">🙂</button></li>
-						<li><button class="icon-btn" data-icon="heart" type="button">♥</button></li>
-						<li><button class="icon-btn" data-icon="check" type="button">✓</button></li>
-					</ul>
+					<section class="goal-icon">
+						<p>Add an icon!</p>
+						<ul>
+							<li><button class="icon-btn selected" data-icon="star" type="button">★</button></li>
+							<li><button class="icon-btn" data-icon="smiley" type="button">🙂</button></li>
+							<li><button class="icon-btn" data-icon="heart" type="button">♥</button></li>
+							<li><button class="icon-btn" data-icon="check" type="button">✓</button></li>
+						</ul>
+					</section>
 
 					<div class="back-next-button">
 						<button class="back-button" type="button">
-							<p>back</p>
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<mask id="mask0_399_120" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+								<rect width="24" height="24" fill="#D9D9D9"/>
+								</mask>
+								<g mask="url(#mask0_399_120)">
+								<path d="M7.825 13L13.425 18.6L12 20L4 12L12 4L13.425 5.4L7.825 11H20V13H7.825Z" fill="#1C1B1F"/>
+								</g>
+								</svg>
+								
 						</button>
-						<button id="step-05" type="button">
-							<p>Next</p>
+						<button id="step-02" class="forward-button" type="button">
+							<svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<mask id="mask0_399_156" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-1" y="0" width="28" height="27">
+								<rect x="23.8455" y="26.5641" width="24" height="24" transform="rotate(-173.496 23.8455 26.5641)" fill="#D9D9D9"/>
+								</mask>
+								<g mask="url(#mask0_399_156)">
+								<path d="M17.5436 12.7615L12.614 6.56323L14.1884 5.33366L21.2307 14.1884L12.376 21.2307L11.1188 19.6783L17.3171 14.7486L5.22044 13.3695L5.44698 11.3824L17.5436 12.7615Z" fill="#1C1B1F"/>
+								</g>
+								</svg>
 						</button>
 					</div>
 				</section>
 
 				<section id="goal-color" class="hidden">
+					<section class="goal-color">
 					<label for="goal-color-picker">Pick a text color</label>
 					<input id="goal-color-picker" type="color" value="#ff0000">
+				</section>
 
 					<div class="back-next-button">
 						<button class="back-button" type="button">
-							<p>back</p>
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<mask id="mask0_399_120" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+								<rect width="24" height="24" fill="#D9D9D9"/>
+								</mask>
+								<g mask="url(#mask0_399_120)">
+								<path d="M7.825 13L13.425 18.6L12 20L4 12L12 4L13.425 5.4L7.825 11H20V13H7.825Z" fill="#1C1B1F"/>
+								</g>
+							</svg>
 						</button>
-						<button id="step-06" type="button">
-							<p>Next</p>
+
+						<button id="step-06" class="forward-button" type="button">
+							<svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<mask id="mask0_399_156" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-1" y="0" width="28" height="27">
+								<rect x="23.8455" y="26.5641" width="24" height="24" transform="rotate(-173.496 23.8455 26.5641)" fill="#D9D9D9"/>
+								</mask>
+								<g mask="url(#mask0_399_156)">
+								<path d="M17.5436 12.7615L12.614 6.56323L14.1884 5.33366L21.2307 14.1884L12.376 21.2307L11.1188 19.6783L17.3171 14.7486L5.22044 13.3695L5.44698 11.3824L17.5436 12.7615Z" fill="#1C1B1F"/>
+								</g>
+							</svg>
 						</button>
 					</div>
 				</section>
 
 				<section id="card-color" class="hidden">
-					<label for="card-color-picker">Pick a card color</label>
-					<input id="card-color-picker" name="card-color" type="color" value="#cccccc">
+					<section class="card-color">
+						<label for="card-color-picker">Pick a card color</label>
+						<input id="card-color-picker" name="card-color" type="color" value="#cccccc">
+					</section>
 
 					<div class="back-next-button">
 						<button class="back-button" type="button">
-							<p>back</p>
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<mask id="mask0_399_120" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+								<rect width="24" height="24" fill="#D9D9D9"/>
+								</mask>
+								<g mask="url(#mask0_399_120)">
+								<path d="M7.825 13L13.425 18.6L12 20L4 12L12 4L13.425 5.4L7.825 11H20V13H7.825Z" fill="#1C1B1F"/>
+								</g>
+							</svg>
 						</button>
-						<button id="step-07" type="button">
-							<p>Make my Card!</p>
+						<button id="step-07" class="forward-button" type="button">
+							Make My Card!
 						</button>
 					</div>
 				</section>
@@ -173,15 +229,15 @@
 					</div>
 				</div>
 				<section class="buttons">
-					<button id="save" type="button">Save</button>
 					<button id="print" type="button">Print!</button>
+	
+					<button id="return-to-start" type="button">Make a New Card!</button>
 				</section>
 			</section>
 	</main>
 
 	<footer>
-		<p>Created by <a href="https://zarahyaqub.com/">Zarah Yaqub</a></p>
-		<p><a href="https://typography-interaction-2526.github.io/">Type &amp; Interaction 2</a></p>
+		<p>&copy; Zarah Yaqub</p>
 	</footer>
 </body>
 </html>

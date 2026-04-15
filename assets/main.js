@@ -6,19 +6,19 @@ let sections = Array.from(
 		'#cover, #goal-title, #reward-title, #goal-number, #goal-icon, #goal-color, #card-color, #card'
 	)
 );
-
+`1`
 //MY UNDERSTANDING:
-//Array.from() converts that list into a  JS array.
+//Array.from() converts that list into a JS array.
 
 //an array enables storing a collection of multiple items under a single variable name, and has members for performing common array operations.
 
-//in my case sections groups every wizard screen (cover, goal-title, …, card)—not the buttons.
+//in my case sections groups every wizard screen (cover, goal-title, etc)—not the buttons.
 
 // mdn : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
 
 //document.querySelectorAll() finds all elements on the page with these IDs: cover, goal-title, reward-title etc
 
-//It gives them back as a list in that same order.
+//It gives them back as a list in that same order as the HTML.
 
 //The array is saved in sections. These become the ordered list of screens/steps that users can move through.
 
@@ -57,7 +57,7 @@ for (let punchIndex = 0; punchIndex < countButtons.length; punchIndex++) {
 }
 
 //MY UNDERSTANDING:
-// there are two loops. 
+// there are two loops.
 //loop 1 - for (let punchIndex = 0; punchIndex < countButtons.length; punchIndex++)
 // punchIndex is just the index (0, 1, 2, etc) while you walk through every count button.
 // countButtons[punchIndex] is the current number button in this pass.
@@ -74,6 +74,10 @@ for (let punchIndex = 0; punchIndex < countButtons.length; punchIndex++) {
 // this.classList.add('selected') — on the button that was actually clicked, add selected (the handler's this is that button).
 // updateCardPreview() — refresh the card preview so the punch count (and anything else that function updates) matches the new choice.
 
+// 1.) go through each ctn-button
+// 2.) When one is clicked, remove "Selected" from all buttons (inner loop)
+// 3.) add selected to the "clicked" one
+// 4.) refresh the preview and update the state
 // basically for each count button: when it's clicked, clear selection on all count buttons, mark only the clicked one as selected, then update the card preview.
 
 function getVisibleSectionIndex() {
@@ -94,6 +98,39 @@ function getVisibleSectionIndex() {
 // As soon as it finds one, it returns that section's position number (i).
 
 // If it somehow can't find any visible section, it returns 0 (the first section) as a fallback.
+
+
+// SHAKE ERROR STATE
+function shakeSection(section) {
+	section.classList.remove('shake');
+	void section.offsetWidth;
+	section.classList.add('shake');
+
+	setTimeout(function () {
+		section.classList.remove('shake');
+	}, 400);
+}
+
+//MY UNDERSTANDING:
+
+// shakeSection() is a helper function for the error state.
+
+// section is whichever section is currently being checked, like goal-title or reward-title.
+
+// section.classList.remove('shake') removes the class first in case it was already there before.
+
+// void section.offsetWidth forces the browser to re-read the layout.
+// this helps restart the animation from the beginning every time.
+
+// section.classList.add('shake') adds the shake class so the CSS animation runs.
+
+// setTimeout removes the shake class after 400ms so the section can be shaken again later.
+
+// basically:
+// 1.) remove old shake
+// 2.) force refresh/restart
+// 3.) add shake class
+// 4.) remove it after the animation finishes
 
 
 // NEXT BUTTONS
@@ -144,10 +181,7 @@ for (let i = 0; i < nextButtons.length; i++) {
 // 	Get the actual section element for that step.
 
 // if (canGoNext(currentSection) === false) {
-// Ask the rules: is the user allowed to leave this step? If not then
-
-// 	return;
-// 	…stop here. Do not hide/show anything.
+// Ask the rules: is the user allowed to leave this step? If not then return;
 
 // 	if (currentIndex < sections.length - 1) {
 // 	Only move forward if there is a next section/user are not already on the last one.
@@ -155,13 +189,13 @@ for (let i = 0; i < nextButtons.length; i++) {
 // 	let nextSection = sections[currentIndex + 1];
 // 	Get the next section in the list (one index higher).
 
-// 	currentSection.classList.add('hidden');
-// 	Hide the current section
-
-// 	nextSection.classList.remove('hidden');
-// 	Show the next section.
-
-//when Next is clicked, get which section is visible right now and check if user can go next in that section. if valid, hide current section and show next section in the list.
+// 1.) loop through all buttons
+// 2.) when something is clicked, we stopped the default processes
+// 3.) check which sections are visible
+// 4.) check if the user is eligible to move on
+// 5.) if yes, we hide the current section and move on to the next
+// 6.) if next section is card preview, we update it
+// 7.) save state
 
 function canGoNext(currentSection) {
 	let sectionId = currentSection.id;
@@ -175,7 +209,7 @@ function canGoNext(currentSection) {
 	if (sectionId === 'goal-title') {
 		let goalInput = document.getElementById('goal-text');
 		if (!goalInput.value.trim()) {
-			alert('Please enter your goal.');
+			shakeSection(currentSection);
 			goalInput.focus();
 			return false;
 		}
@@ -186,7 +220,7 @@ function canGoNext(currentSection) {
 	if (sectionId === 'reward-title') {
 		let rewardInput = document.getElementById('reward-text');
 		if (!rewardInput.value.trim()) {
-			alert('Please enter your reward.');
+			shakeSection(currentSection);
 			rewardInput.focus();
 			return false;
 		}
@@ -197,7 +231,7 @@ function canGoNext(currentSection) {
 	if (sectionId === 'goal-number') {
 		let selectedCount = currentSection.querySelector('.count-btn.selected');
 		if (!selectedCount) {
-			alert('Please choose how many times.');
+			shakeSection(currentSection);
 			return false;
 		}
 		return true;
@@ -207,7 +241,7 @@ function canGoNext(currentSection) {
 	if (sectionId === 'goal-icon') {
 		let selectedIcon = currentSection.querySelector('.icon-btn.selected');
 		if (!selectedIcon) {
-			alert('Please choose an icon.');
+			shakeSection(currentSection);
 			return false;
 		}
 		return true;
@@ -217,7 +251,7 @@ function canGoNext(currentSection) {
 	if (sectionId === 'goal-color') {
 		let goalColor = document.getElementById('goal-color-picker');
 		if (!goalColor.value) {
-			alert('Please pick a goal color.');
+			shakeSection(currentSection);
 			return false;
 		}
 		return true;
@@ -227,7 +261,7 @@ function canGoNext(currentSection) {
 	if (sectionId === 'card-color') {
 		let cardColor = document.getElementById('card-color-picker');
 		if (!cardColor.value) {
-			alert('Please pick a card color.');
+			shakeSection(currentSection);
 			return false;
 		}
 		return true;
@@ -247,10 +281,11 @@ function canGoNext(currentSection) {
 //color sections must have a color value.
 
 // if (!) {
-// 	alert('');
+// 	shakeSection(currentSection);
 // 	return false;
-// means that is a option is not picked show the error in the ''
+// means that if the required option is missing, shake the current section and stop the user from moving on.
 
+// goalInput.focus() or rewardInput.focus() moves the cursor back into that input so the user can fix it right away.
 
 
 // BACK BUTTONS
@@ -281,6 +316,7 @@ for (let i = 0; i < backButtons.length; i++) {
 //The loop attaches the same handler to each back button.
 
 //On click: find the visible section. If index > 0, hide current and show the previous section in sections[].
+
 
 // CARD PREVIEW VARIABLES
 let goalInput = document.getElementById('goal-text');
@@ -330,7 +366,7 @@ function updateCardPreview() {
 	// let count = 8;
 	// Creates a variable count and sets it to 8.
 	// It's usually a default fallback: "if we didn't find a selected count button, assume 8" (or use 8 until the user picks a number).
-	// basically figure out which count button is selected and if you can't then stay with  with 8 
+	// basically figure out which count button is selected and if you can't then stay with 8
 
 	if (selectedCountButton) {
 		count = Number(selectedCountButton.getAttribute('data-count'));
@@ -375,7 +411,7 @@ function updateCardPreview() {
 		}
 	}
 }
-// updates punch icon 
+// updates punch icon
 
 goalInput.addEventListener('input', function () { updateCardPreview(); saveFormState(); });
 rewardInput.addEventListener('input', function () { updateCardPreview(); saveFormState(); });
@@ -422,7 +458,7 @@ if (saveButton) {
 
 //Right now the handler calls window.print(), which opens the browser's print dialog (same behavior as Print).
 
-// PRINT 
+// PRINT
 let printButton = document.getElementById('print');
 
 if (printButton) {
