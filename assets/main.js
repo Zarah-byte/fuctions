@@ -1,12 +1,13 @@
 // AI Link: https://claude.ai/share/3e4dbf9c-7b90-4bea-bfde-2ccf5f829bce
 
 // VARIABLES
+let cover = document.getElementById('cover');
+
 let sections = Array.from(
 	document.querySelectorAll(
-		'#cover, #goal-title, #reward-title, #goal-number, #goal-icon, #goal-color, #card-color, #card'
+		'#goal-title, #goal-number, #goal-icon, #goal-color, #card-color, #card'
 	)
 );
-`1`
 //MY UNDERSTANDING:
 //Array.from() converts that list into a JS array.
 
@@ -23,9 +24,21 @@ let sections = Array.from(
 //The array is saved in sections. These become the ordered list of screens/steps that users can move through.
 
 
-let nextButtons = document.querySelectorAll(
-	'#step-01, #step-02, #step-03, #step-04, #step-05, #step-06, #step-07'
-);
+// Cover dismiss
+let step01 = document.getElementById('step-01');
+if (step01) {
+	step01.addEventListener('click', function () {
+		cover.classList.add('cover--out');
+		if (sharedNav) sharedNav.style.display = 'flex';
+		updateProgressBar();
+		setTimeout(function () {
+			cover.classList.add('hidden');
+			cover.classList.remove('cover--out');
+		}, 500);
+	});
+}
+
+let nextButtons = document.querySelectorAll('#nav-next');
 
 //MY UNDERSTANDING:
 
@@ -80,34 +93,92 @@ for (let punchIndex = 0; punchIndex < countButtons.length; punchIndex++) {
 // 4.) refresh the preview and update the state
 // basically for each count button: when it's clicked, clear selection on all count buttons, mark only the clicked one as selected, then update the card preview.
 
+// Deck sections = form steps only (no cover, no final card)
+let deckSections = sections.slice(0, sections.length - 1);
+let finalCard = document.getElementById('card');
+
 function getVisibleSectionIndex() {
-	for (let punchIndex = 0; punchIndex < sections.length; punchIndex++) {
-		if (sections[punchIndex].classList.contains('hidden') === false) {
-			return punchIndex;
-		}
+	for (let i = 0; i < deckSections.length; i++) {
+		if (deckSections[i].classList.contains('card--current')) return i;
 	}
+	if (finalCard && !finalCard.classList.contains('hidden')) return sections.length - 1;
 	return 0;
 }
 
-//MY UNDERSTANDING:
+let sharedNav = document.querySelector('.back-next-button');
 
-// This function checks your sections list from start to end.
+function setDeckState(currentIdx) {
+	deckSections.forEach(function (s) {
+		s.classList.remove('card--current', 'card--exit-left', 'card--exit-right', 'card--enter-right', 'card--enter-left');
+	});
+	if (deckSections[currentIdx]) {
+		deckSections[currentIdx].classList.add('card--current');
+	}
 
-// It looks for the first section that is not hidden.
+	// Show shared nav (cover hides it via its own logic)
+	if (sharedNav && cover.classList.contains('hidden')) {
+		sharedNav.style.display = 'flex';
+	}
+}
 
-// As soon as it finds one, it returns that section's position number (i).
+const SLIDE_DURATION = 420;
+let isSliding = false;
 
-// If it somehow can't find any visible section, it returns 0 (the first section) as a fallback.
+function slideCards(fromSection, toSection, direction) {
+	if (isSliding) return;
+	isSliding = true;
 
+	let exitClass  = direction === 'forward' ? 'card--exit-left'  : 'card--exit-right';
+	let enterClass = direction === 'forward' ? 'card--enter-right' : 'card--enter-left';
+
+	fromSection.classList.remove('card--current');
+	fromSection.classList.add(exitClass);
+	toSection.classList.add(enterClass);
+
+	setTimeout(function () {
+		fromSection.classList.remove(exitClass);
+		toSection.classList.remove(enterClass);
+		toSection.classList.add('card--current');
+		isSliding = false;
+		updateProgressBar();
+		saveFormState();
+	}, SLIDE_DURATION);
+}
+
+// Initialise deck
+setDeckState(0);
+
+
+// PROGRESS BAR
+// sections[0] = cover, sections[last] = card — hide bar on both ends.
+// During form steps (indices 1 to length-2), fill proportionally.
+function updateProgressBar() {
+	let progressWrap = document.getElementById('progress-bar-wrap');
+	let progressBar  = document.getElementById('progress-bar');
+
+	// Hide if cover is showing or final card is showing
+	if (!cover.classList.contains('hidden') || (finalCard && !finalCard.classList.contains('hidden'))) {
+		progressWrap.classList.add('hidden');
+		return;
+	}
+
+	let currentIndex = getVisibleSectionIndex();
+	let formSteps    = deckSections.length;
+
+	progressWrap.classList.remove('hidden');
+	let percent = ((currentIndex + 1) / formSteps) * 100;
+	progressBar.style.width = percent + '%';
+}
 
 // SHAKE ERROR STATE
 function shakeSection(section) {
-	section.classList.remove('shake');
-	void section.offsetWidth;
-	section.classList.add('shake');
+	let target = section.querySelector('.addgoal, .reward-title, .goal-number, .goal-icon, .goal-color, .card-color') || section;
+	target.classList.remove('shake');
+	void target.offsetWidth;
+	target.classList.add('shake');
 
 	setTimeout(function () {
-		section.classList.remove('shake');
+		target.classList.remove('shake');
 	}, 400);
 }
 
@@ -135,31 +206,40 @@ function shakeSection(section) {
 
 // NEXT BUTTONS
 for (let i = 0; i < nextButtons.length; i++) {
-	let currentNextButton = nextButtons[i];
-
-	currentNextButton.addEventListener('click', function (event) {
+	nextButtons[i].addEventListener('click', function (event) {
 		event.preventDefault();
 
 		let currentIndex = getVisibleSectionIndex();
-		let currentSection = sections[currentIndex];
+		let currentSection = deckSections[currentIndex];
 
-		if (canGoNext(currentSection) === false) {
+		if (!currentSection || canGoNext(currentSection) === false) return;
+
+		let nextIndex = currentIndex + 1;
+
+		// Moving to the final card section — exit + loader + reveal
+		if (nextIndex >= deckSections.length) {
+			if (isSliding) return;
+			isSliding = true;
+			currentSection.classList.remove('card--current');
+			currentSection.classList.add('card--exit-left');
+			let loader = document.getElementById('loader');
+			loader.classList.remove('hidden');
+
+			setTimeout(function () {
+				currentSection.classList.remove('card--exit-left');
+				loader.classList.add('hidden');
+				finalCard.classList.remove('hidden');
+				if (sharedNav) sharedNav.style.display = 'none';
+				isSliding = false;
+				updateCardPreview();
+				updateProgressBar();
+				saveFormState();
+			}, 1500);
 			return;
 		}
 
-		if (currentIndex < sections.length - 1) {
-			let nextSection = sections[currentIndex + 1];
-
-			currentSection.classList.add('hidden');
-			nextSection.classList.remove('hidden');
-
-			if (nextSection.id === 'card') {
-				updateCardPreview();
-			}
-
-			// Save state any time the step changes.
-			saveFormState();
-		}
+		// Horizontal slide to next card
+		slideCards(currentSection, deckSections[nextIndex], 'forward');
 	});
 }
 
@@ -205,22 +285,18 @@ function canGoNext(currentSection) {
 		return true;
 	}
 
-	// goal-title: requires text
+	// goal-title: both goal and reward inputs must be filled
 	if (sectionId === 'goal-title') {
 		let goalInput = document.getElementById('goal-text');
+		let rewardInput = document.getElementById('reward-text');
+
 		if (!goalInput.value.trim()) {
-			shakeSection(currentSection);
+			shakeSection(currentSection.querySelector('.addgoal'));
 			goalInput.focus();
 			return false;
 		}
-		return true;
-	}
-
-	// reward-title: requires text
-	if (sectionId === 'reward-title') {
-		let rewardInput = document.getElementById('reward-text');
 		if (!rewardInput.value.trim()) {
-			shakeSection(currentSection);
+			shakeSection(currentSection.querySelector('.reward-title'));
 			rewardInput.focus();
 			return false;
 		}
@@ -290,21 +366,28 @@ function canGoNext(currentSection) {
 
 // BACK BUTTONS
 for (let i = 0; i < backButtons.length; i++) {
-	let currentBackButton = backButtons[i];
-
-	currentBackButton.addEventListener('click', function (event) {
+	backButtons[i].addEventListener('click', function (event) {
 		event.preventDefault();
 
 		let currentIndex = getVisibleSectionIndex();
 
+		// Going back from the final card section
+		if (finalCard && !finalCard.classList.contains('hidden')) {
+			finalCard.classList.add('hidden');
+			if (sharedNav) sharedNav.style.display = 'flex';
+			setDeckState(deckSections.length - 1);
+			updateProgressBar();
+			saveFormState();
+			return;
+		}
+
 		if (currentIndex > 0) {
-			let currentSection = sections[currentIndex];
-			let previousSection = sections[currentIndex - 1];
-
-			currentSection.classList.add('hidden');
-			previousSection.classList.remove('hidden');
-
-			// Save state any time the step changes.
+			slideCards(deckSections[currentIndex], deckSections[currentIndex - 1], 'back');
+		} else {
+			// Back from first step → return to cover
+			cover.classList.remove('hidden', 'cover--out');
+			if (sharedNav) sharedNav.style.display = 'none';
+			updateProgressBar();
 			saveFormState();
 		}
 	});
@@ -398,27 +481,58 @@ function updateCardPreview() {
 	// Basically show only the first count punch rows; hide all the rest.
 
 	let selectedIconButton = document.querySelector('.icon-btn.selected');
-	let selectedSymbol = '★';
+	let iconType = selectedIconButton ? selectedIconButton.getAttribute('data-icon') : null;
 
-	if (selectedIconButton) {
-		selectedSymbol = selectedIconButton.textContent;
+	let punchList = document.querySelector('.punches');
+	if (punchList) {
+		punchList.style.color = goalColorPicker.value;
 	}
 
 	for (let punchIndex = 0; punchIndex < punchItems.length; punchIndex++) {
 		let punchContent = punchItems[punchIndex].querySelector('.punch-content');
 		if (punchContent) {
-			punchContent.textContent = selectedSymbol;
+			if (selectedIconButton) {
+				let svgEl = selectedIconButton.querySelector('svg');
+				punchContent.innerHTML = svgEl ? svgEl.outerHTML : '★';
+				if (iconType) {
+					punchContent.setAttribute('data-icon', iconType);
+				}
+			} else {
+				punchContent.textContent = '★';
+				punchContent.removeAttribute('data-icon');
+			}
 		}
 	}
 }
 // updates punch icon
 
-goalInput.addEventListener('input', function () { updateCardPreview(); saveFormState(); });
+function updateMiniPreview() {
+	let miniPreview = document.getElementById('mini-preview');
+	let previewLetter = document.getElementById('preview-letter');
+	let previewIconWrap = document.getElementById('preview-icon-wrap');
+	let selectedIconButton = document.querySelector('.icon-btn.selected');
+
+	if (previewLetter) {
+		let goalVal = goalInput.value.trim();
+		previewLetter.textContent = goalVal ? goalVal[0].toUpperCase() : '';
+		previewLetter.style.color = goalColorPicker.value;
+	}
+	if (previewIconWrap) {
+		let svgEl = selectedIconButton ? selectedIconButton.querySelector('svg') : null;
+		previewIconWrap.innerHTML = svgEl ? svgEl.outerHTML : '';
+		previewIconWrap.style.color = goalColorPicker.value;
+	}
+	if (miniPreview) {
+		miniPreview.style.backgroundColor = cardColorPicker.value;
+	}
+}
+
+goalInput.addEventListener('input', function () { updateCardPreview(); updateMiniPreview(); saveFormState(); });
 rewardInput.addEventListener('input', function () { updateCardPreview(); saveFormState(); });
 // listens for typing in the inputs
 
-goalColorPicker.addEventListener('input', function () { updateCardPreview(); saveFormState(); });
-cardColorPicker.addEventListener('input', function () { updateCardPreview(); saveFormState(); });
+goalColorPicker.addEventListener('input', function () { updateCardPreview(); updateMiniPreview(); saveFormState(); });
+cardColorPicker.addEventListener('input', function () { updateCardPreview(); updateMiniPreview(); saveFormState(); });
 // listens for color changes
 
 for (let i = 0; i < iconButtons.length; i++) {
@@ -429,6 +543,7 @@ for (let i = 0; i < iconButtons.length; i++) {
 
 		this.classList.add('selected');
 		updateCardPreview();
+		updateMiniPreview();
 		// Save state any time an icon is selected.
 		saveFormState();
 	});
@@ -436,7 +551,9 @@ for (let i = 0; i < iconButtons.length; i++) {
 // listens for icon button clicks
 
 updateCardPreview();
+updateMiniPreview();
 // runs once when page loads
+
 
 // SAVE TO DEVICE BUTTON
 
@@ -457,6 +574,8 @@ if (saveButton) {
 //addEventListener('click', etc) runs the function when the user clicks Save.
 
 //Right now the handler calls window.print(), which opens the browser's print dialog (same behavior as Print).
+
+
 
 // PRINT
 let printButton = document.getElementById('print');
@@ -522,21 +641,20 @@ function loadFormState() {
 	let state = JSON.parse(saved);
 	// Convert saved text back into an object
 
-	if (state.goal) goalInput.value = state.goal;
-	if (state.reward) rewardInput.value = state.reward;
-	if (state.goalColor) goalColorPicker.value = state.goalColor;
-	if (state.cardColor) cardColorPicker.value = state.cardColor;
+	if (state.text && state.text.goal) goalInput.value = state.text.goal;
+	if (state.text && state.text.reward) rewardInput.value = state.text.reward;
+	if (state.style && state.style.goalColor) goalColorPicker.value = state.style.goalColor;
+	if (state.style && state.style.cardColor) cardColorPicker.value = state.style.cardColor;
 	// Restore text and color fields if those values exist.
 
-	if (state.count) {
-		let matchingCount = document.querySelector(`.count-btn[data-count="${state.count}"]`);
+	if (state.choices && state.choices.count) {
+		let matchingCount = document.querySelector(`.count-btn[data-count="${state.choices.count}"]`);
 		if (matchingCount) matchingCount.classList.add('selected');
 	}
 	// Finds the count button with matching data-count and mark it selected.
 
-
-	if (state.icon) {
-		let matchingIcon = document.querySelector(`.icon-btn[data-icon="${state.icon}"]`);
+	if (state.choices && state.choices.icon) {
+		let matchingIcon = document.querySelector(`.icon-btn[data-icon="${state.choices.icon}"]`);
 		if (matchingIcon) {
 			document.querySelectorAll('.icon-btn').forEach(btn => btn.classList.remove('selected'));
 			matchingIcon.classList.add('selected');
@@ -545,17 +663,26 @@ function loadFormState() {
 	// 	Finds the icon button with matching data-icon.
 	// Clear selected from all icons first, then select the matching one.
 
-	if (state.currentStep) {
-		sections.forEach(s => s.classList.add('hidden'));
-		sections[state.currentStep].classList.remove('hidden');
+	if (state.progress && state.progress.currentStep !== undefined && state.progress.currentStep !== null) {
+		let step = Number(state.progress.currentStep);
+		if (step >= deckSections.length) {
+			// Was on the final card
+			finalCard.classList.remove('hidden');
+			setDeckState(deckSections.length - 1);
+		} else {
+			finalCard.classList.add('hidden');
+			setDeckState(step);
+		}
 	}
-	// Hide all sections, then show only the saved step.
+	// Restore the saved step in the deck.
 
 	updateCardPreview();
+	updateProgressBar();
 	// Refresh the card so it matches restored values.
 }
 
 loadFormState();
+updateMiniPreview();
 // this rus everything
 
 
@@ -583,13 +710,11 @@ if (returnToStartButton) {
 			iconButtons[0].classList.add('selected');
 		}
 
-		// hide every section
-		for (let i = 0; i < sections.length; i++) {
-			sections[i].classList.add('hidden');
-		}
-
-		// show the cover again
-		document.getElementById('cover').classList.remove('hidden');
+		// hide the final card, reset deck, and show the cover
+		finalCard.classList.add('hidden');
+		if (sharedNav) sharedNav.style.display = 'none';
+		cover.classList.remove('hidden', 'cover--out');
+		setDeckState(0);
 
 		// clear saved progress from local storage
 		localStorage.clear('punchyFormState');
@@ -597,22 +722,6 @@ if (returnToStartButton) {
 
 		// redraw the preview card with the reset/default values
 		updateCardPreview();
+		updateProgressBar();
 	});
 }
-
-//MY UNDERSTANDING:
-//when that button is clicked, the form is reset back to its starting values.
-
-//cardForm.reset() resets the text inputs and color pickers to their original HTML values.
-
-//the loops remove selected from all count buttons and icon buttons.
-
-//then the first icon button gets selected again because that is the default starting icon.
-
-//the sections loop hides every screen in the wizard.
-
-//then cover is shown again so the user goes back to the beginning.
-
-//localStorage.clear('punchyFormState') deletes the saved progress so the new card starts fresh.
-
-//updateCardPreview() redraws the preview so it matches the reset values.
