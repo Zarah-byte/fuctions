@@ -1,0 +1,39 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - heading [level=1] [ref=e3]
+    - button "exit" [ref=e27]
+    - generic [ref=e28]:
+      - paragraph [ref=e29]:
+        - text: this project was built as a part of
+        - link "typography & interaction course" [ref=e30] [cursor=pointer]:
+          - /url: https://typography-interaction-2526.github.io/
+        - text: as a part of my time as part of the
+        - link "mps communication design class of 2026" [ref=e31] [cursor=pointer]:
+          - /url: https://mpscd.parsons.edu/students/
+        - text: .
+      - paragraph [ref=e32]: it combines my love of task organizers and playful UI <3
+      - paragraph [ref=e33]:
+        - generic [ref=e34]: find me
+        - generic [ref=e35]:
+          - link "portfolio" [ref=e36] [cursor=pointer]:
+            - /url: https://zarahyaqub.com/
+          - text: ","
+          - link "email" [ref=e37] [cursor=pointer]:
+            - /url: mailto:zarahyaqubdesign@gmail.com
+          - text: ","
+          - link "linkedin" [ref=e38] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/zarahyaqubdesign
+  - main [ref=e14]:
+    - generic [ref=e15]:
+      - list [ref=e16]:
+        - listitem [ref=e17]:
+          - paragraph [ref=e18]: set your intentions!
+        - listitem [ref=e19]
+        - listitem [ref=e20]:
+          - paragraph [ref=e21]: decorate!
+        - listitem [ref=e22]
+        - listitem [ref=e23]:
+          - paragraph [ref=e24]: complete your goals!
+      - button [ref=e25]:
+        - paragraph [ref=e26]: get started!
+  - contentinfo

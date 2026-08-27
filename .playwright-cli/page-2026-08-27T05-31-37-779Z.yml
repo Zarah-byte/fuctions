@@ -1,0 +1,42 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - heading [level=1] [ref=e3]
+    - button [ref=e12]:
+      - paragraph [ref=e13]: info
+  - main [ref=e14]:
+    - generic [ref=e90]:
+      - paragraph [ref=e91]: How many times do you want to achieve your goal?
+      - list [ref=e92]:
+        - listitem [ref=e93]:
+          - button "1" [ref=e94] [cursor=pointer]
+        - listitem [ref=e95]:
+          - button "2" [ref=e96] [cursor=pointer]
+        - listitem [ref=e97]:
+          - button "3" [ref=e98] [cursor=pointer]
+        - listitem [ref=e99]:
+          - button "4" [ref=e100] [cursor=pointer]
+        - listitem [ref=e101]:
+          - button "5" [ref=e102] [cursor=pointer]
+        - listitem [ref=e103]:
+          - button "6" [ref=e104] [cursor=pointer]
+        - listitem [ref=e105]:
+          - button "7" [ref=e106] [cursor=pointer]
+        - listitem [ref=e107]:
+          - button "8" [ref=e108] [cursor=pointer]
+      - generic [ref=e109]:
+        - button "back" [ref=e110] [cursor=pointer]
+        - button "next" [ref=e111] [cursor=pointer]
+    - complementary [ref=e37]:
+      - generic [ref=e38]:
+        - paragraph [ref=e39]: Read 10 books
+        - list [ref=e40]:
+          - listitem [ref=e41]
+          - listitem [ref=e47]
+          - listitem [ref=e53]
+          - listitem [ref=e59]
+          - listitem [ref=e65]
+          - listitem [ref=e71]
+          - listitem [ref=e77]
+          - listitem [ref=e83]
+        - paragraph [ref=e89]: Buy new boots!
+  - contentinfo

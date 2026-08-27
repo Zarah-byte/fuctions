@@ -1,0 +1,19 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - heading [level=1] [ref=e3]
+    - button [ref=e12]:
+      - paragraph [ref=e13]: info
+  - main [ref=e14]:
+    - generic [ref=e15]:
+      - list [ref=e16]:
+        - listitem [ref=e17]:
+          - paragraph [ref=e18]: set your intentions!
+        - listitem [ref=e19]
+        - listitem [ref=e20]:
+          - paragraph [ref=e21]: decorate!
+        - listitem [ref=e22]
+        - listitem [ref=e23]:
+          - paragraph [ref=e24]: complete your goals!
+      - button [ref=e25]:
+        - paragraph [ref=e26]: get started!
+  - contentinfo

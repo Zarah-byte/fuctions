@@ -1,0 +1,32 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - heading [level=1] [ref=e3]
+    - button [ref=e12]:
+      - paragraph [ref=e13]: info
+  - main [ref=e14]:
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - generic [ref=e29]: Add your goal!
+        - textbox "Add your goal!" [ref=e30]:
+          - /placeholder: Read 10 books
+      - generic [ref=e31]:
+        - generic [ref=e32]: Add your reward!
+        - textbox "Add your reward!" [ref=e33]:
+          - /placeholder: Buy new boots!
+      - generic [ref=e34]:
+        - button "back" [ref=e35] [cursor=pointer]
+        - button "next" [ref=e36] [cursor=pointer]
+    - complementary [ref=e37]:
+      - generic [ref=e38]:
+        - paragraph [ref=e39]: your goal!
+        - list [ref=e40]:
+          - listitem [ref=e41]
+          - listitem [ref=e47]
+          - listitem [ref=e53]
+          - listitem [ref=e59]
+          - listitem [ref=e65]
+          - listitem [ref=e71]
+          - listitem [ref=e77]
+          - listitem [ref=e83]
+        - paragraph [ref=e89]: your reward!
+  - contentinfo
